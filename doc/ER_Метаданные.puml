@@ -1,0 +1,202 @@
+@startuml
+
+!include https://raw.githubusercontent.com/Kyrales/1C-ER-plantuml/refs/heads/extended/main.puml
+
+title Диаграмма метаданных в подсистеме 'Limits for employees' 
+
+package "Учетная система" #d3fffbff {
+
+    package НСИ <<Frame>> #e4ff99ff {
+        v8_Catalog(Entities){
+            Ссылка
+        }
+
+        v8_Catalog(Employees){
+            Ссылка
+        }
+
+        v8_Catalog(CashFlowItems, "Cash Flow items"){
+            Ссылка
+        }
+    }
+
+    v8_Catalog(TypesOfLimitsForEmployees, "Types of limits for employees"){
+        Ссылка
+        Resource type
+        Cash flow item
+        One time
+    }
+
+    v8_Catalog(StageOfLimitsForEmployees, "Stage of limits for employees"){
+        Ссылка
+        Employment contract
+        Type of limit
+        Start date
+        End date
+        Description key
+        }
+
+    package "Установка лимитов" <<Frame>> #99c0ffff {
+
+        v8_Document(EmploymentContract, "Employment contract"){
+            Ссылка
+            Entity
+            Employee
+            --ТЧ Limits for employees--
+            TypeOfLimit
+            Stage
+            LimitDate
+            LimitDateEnd
+            Limit
+        }
+
+        v8_InfoRg(EmployeeLimitPlaning, "Employee limit planing"){
+            <$d>Регистратор
+            <$d>Entity
+            <$d>Employee
+            <$d>TypeOfLimit
+            <$d>Stage
+            <$r>Limit
+            }
+    }
+
+    package "Контроль лимитов" <<Frame>> #84c39eff{
+
+        v8_Document(ExpenseByLimits, "Expense by limits"){
+            Ссылка
+            Entity
+            Employee
+            --ТЧ Limits for employees--
+            TypeOfLimit
+            Stage
+            Limit
+        }
+
+        v8_Document(Tickets){
+            Ссылка
+            Entity
+            Employee
+            TypeOfLimits
+            StageOfLimit
+            Count
+        }
+
+        v8_Document(PaymentExpense, "Bank Payment"){
+            Ссылка
+            Entity
+            Employee
+            StageOfLimit
+            Article : СправочникСсылка.CashFlowItems
+            PaymentAmount
+        }
+
+        v8_AccRg(TurnoverByEmployeeLimits, "Turnover by employee limits"){
+            <$d>Регистратор
+            <$d>Entity
+            <$d>Employee
+            <$d>TypeOfLimit
+            <$d>Stage
+            <$r>Limit
+        }
+
+    }
+
+'Ссылки на основные НСИ
+Entities-->EmploymentContract
+Employees-->EmploymentContract
+
+Entities-->EmployeeLimitPlaning
+Employees-->EmployeeLimitPlaning
+
+Entities-->Tickets
+Employees-->Tickets
+
+Entities-->ExpenseByLimits
+Employees-->ExpenseByLimits
+
+Entities-->PaymentExpense
+Employees-->PaymentExpense
+
+Entities-->TurnoverByEmployeeLimits
+Employees-->TurnoverByEmployeeLimits
+
+CashFlowItems-down->TypesOfLimitsForEmployees : CashFlowItem
+CashFlowItems-down->PaymentExpense : Article
+
+'Ссылки в этапах
+TypesOfLimitsForEmployees-left->StageOfLimitsForEmployees : TypeOfLimit
+EmploymentContract-->StageOfLimitsForEmployees : EmploymentContract
+
+'Установка лимитов
+TypesOfLimitsForEmployees-->EmploymentContract : TypeOfLimit
+
+TypesOfLimitsForEmployees-->EmployeeLimitPlaning : TypeOfLimit
+StageOfLimitsForEmployees-down->EmployeeLimitPlaning : Stage
+EmploymentContract-->EmployeeLimitPlaning
+
+'Расход лимитов
+TypesOfLimitsForEmployees-->ExpenseByLimits : TypeOfLimit
+StageOfLimitsForEmployees-->ExpenseByLimits : Stage
+
+TypesOfLimitsForEmployees-->Tickets : TypeOfLimits
+StageOfLimitsForEmployees-->Tickets : StageOfLimit
+
+StageOfLimitsForEmployees-->PaymentExpense : StageOfLimit
+
+TypesOfLimitsForEmployees-->TurnoverByEmployeeLimits : TypeOfLimit
+StageOfLimitsForEmployees-->TurnoverByEmployeeLimits : Stage
+ExpenseByLimits -->TurnoverByEmployeeLimits
+Tickets-->TurnoverByEmployeeLimits
+PaymentExpense-->TurnoverByEmployeeLimits
+
+}
+
+package СЭД #d3fffbff {
+
+    package "НСИ" <<Frame>> #e4ff99ff {
+
+        v8_Catalog(Организации){
+            Ссылка
+        }
+
+        v8_Catalog(Сотрудники){
+            Ссылка
+        }
+    
+        v8_Catalog(СтатьиДвиженияДенежныхСредств, "Статьи движения денежных средств"){
+            Ссылка
+        }
+    
+    }
+
+    v8_Catalog(ЭтапыЛимитовСотрудников, "Этапы лимитов сотрудников"){
+        Ссылка
+        Владелец
+        СтатьяДвиженияДенежныхСредств
+        НаименованиеКлюч
+        ДатаНачала
+        ДатаОкончания
+        }
+    
+    v8_Catalog(ДокументыПредприятия, "Документы"){
+        Ссылка
+        Организация
+        Сотрудник
+        СтатьяДвиженияДенежныхСредств
+        Этап
+        Сумма
+    }
+
+    Сотрудники-->ЭтапыЛимитовСотрудников : Владелец
+    СтатьиДвиженияДенежныхСредств-->ЭтапыЛимитовСотрудников : СтатьяДвиженияДенежныхСредств
+
+    Организации-down->ДокументыПредприятия : Организация
+    Сотрудники-down->ДокументыПредприятия : Сотрудник
+    СтатьиДвиженияДенежныхСредств-down->ДокументыПредприятия : СтатьяДвиженияДенежныхСредств
+    ЭтапыЛимитовСотрудников-left->ДокументыПредприятия : Этап
+}
+
+СЭД-down..>"Учетная система" : Данные о запросе на возмещение расходов
+"Учетная система".up.>СЭД : Данные об остатках лимитов
+
+@enduml

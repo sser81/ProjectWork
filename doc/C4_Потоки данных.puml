@@ -1,0 +1,34 @@
+@startuml
+!NEW_C4_STYLE=1
+
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+title Диаграмма потоков данных в подсистеме 'Limits for employees' 
+
+Person(Employee, Сотрудник, "Сотрудник, инициирующий запрос на возмещение затрат")
+Person(Accounter, Бухгалтер)
+
+System_Boundary(Accounting, "Учетная система"){
+    Container(LimitsForEmployees, "Подсистема 'Limits for employees'", "", "Функционал, предназначенный для установки и контроля значений лимититов расходов возмещаемых сотрудникам компанией")
+    Container(BankDocuments, "Подсистема 'Bank Documents'", "", "Учет банковских документов")
+}
+System(Docflow,"СЭД", "Система учета электронного документооборота на предприятии")
+Component(RMQ, "Брокер RabbitMQ")
+
+Rel(Accounter, LimitsForEmployees, "Значения лимитов в документе 'Employment contract'")
+Rel(Accounter, BankDocuments, "Проверка документов 'Bank Payment'")
+
+Rel(Employee, Docflow, "Документ 'Запрос на возмещение расходов'")
+
+Rel_U(RMQ, LimitsForEmployees, "Данные о возмещении затрат", XML)
+Rel_D(LimitsForEmployees, RMQ, "Данные об остатках лимитов", XML)
+
+Rel_R(LimitsForEmployees, BankDocuments, "Документы 'Bank payment'")
+
+Rel_D(Docflow, RMQ, "Данные о возмещении затрат", XML)
+Rel_U(RMQ, Docflow, "Данные об остатках лимитов", XML)
+
+SHOW_LEGEND()
+
+@enduml
