@@ -9,11 +9,11 @@ title Диаграмма потоков данных в подсистеме 'Li
 Person(Employee, Сотрудник, "Сотрудник, инициирующий запрос на возмещение затрат")
 Person(Accounter, Бухгалтер)
 
-System_Boundary(Accounting, "Учетная система (1С)"){
+System_Boundary(Accounting, "Учетная система"){
     Container(LimitsForEmployees, "Подсистема 'Limits for employees'", "", "Функционал, предназначенный для установки и контроля значений лимититов расходов возмещаемых сотрудникам компанией")
     Container(BankDocuments, "Подсистема 'Bank Documents'", "", "Учет банковских документов")
 }
-System(Docflow,"1С:Документооборот", "Система учета электронного документооборота на предприятии")
+System(Docflow,"СЭД", "Система учета электронного документооборота на предприятии")
 Component(RMQ, "Брокер RabbitMQ")
 
 Rel(Accounter, LimitsForEmployees, "Значения лимитов в документе 'Employment contract'")
