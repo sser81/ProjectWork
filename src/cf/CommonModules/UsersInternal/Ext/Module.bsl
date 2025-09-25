@@ -2904,7 +2904,7 @@ Procedure FillCommonSettingsFromCommonPasswordPolicy(Settings)
 		ValidationSettings.UseStandardPasswordCompromiseCheckList;
 	
 	Settings.ShouldUseAdditionalBannedPasswordList =
-		ValidationSettings.UseSetPasswordCompromiseCheckList;
+		ValidationSettings.UseSpecifiedPasswordCompromiseCheckList;
 	
 	Settings.ShouldUseBannedPasswordService =
 		ValidationSettings.UsePasswordCompromiseCheckService;
@@ -3019,11 +3019,11 @@ Procedure UpdateCommonPasswordPolicy(Settings) Export
 			Settings.ShouldUseStandardBannedPasswordList;
 	EndIf;
 	
-	If ValidationSettings.UseSetPasswordCompromiseCheckList
+	If ValidationSettings.UseSpecifiedPasswordCompromiseCheckList
 	  <> Settings.ShouldUseAdditionalBannedPasswordList Then
 		
 		Write = True;
-		ValidationSettings.UseSetPasswordCompromiseCheckList =
+		ValidationSettings.UseSpecifiedPasswordCompromiseCheckList =
 			Settings.ShouldUseAdditionalBannedPasswordList;
 	EndIf;
 	
@@ -3376,10 +3376,10 @@ Function CurrentActionUponLoginIfRequirementNotMet(PasswordPolicy = Undefined)
 		Eval("GetActionOnUserPasswordRequirementsViolationOnAuthentication()"),
 		PasswordPolicy.ActionUponAuthenticationIfPasswordsNonCompliant);
 	
-	If CurrentAction1 = Eval("ActionOnPasswordRequirementsViolationOnAuthentication.RequirePasswordChange") Then
+	If CurrentAction1 = Eval("ActionOnThePasswordRequirementsViolationOnAuthentication.RequirePasswordChange") Then
 		Return "RequirePasswordChange";
 		
-	ElsIf CurrentAction1 = Eval("ActionOnPasswordRequirementsViolationOnAuthentication.SuggestPasswordChange") Then
+	ElsIf CurrentAction1 = Eval("ActionOnThePasswordRequirementsViolationOnAuthentication.SuggestPasswordChange") Then
 		Return "SuggestPasswordChange";
 		
 	EndIf;
@@ -3393,13 +3393,13 @@ Function ValueOfActionUponLoginIfRequirementNotMet(ActionName)
 	
 	// ACC:488-off - Support of new 1C:Enterprise methods (the executable code is safe)
 	If ActionName = "RequirePasswordChange" Then
-		Return Eval("ActionOnPasswordRequirementsViolationOnAuthentication.RequirePasswordChange");
+		Return Eval("ActionOnThePasswordRequirementsViolationOnAuthentication.RequirePasswordChange");
 		
 	ElsIf ActionName = "SuggestPasswordChange" Then
-		Return Eval("ActionOnPasswordRequirementsViolationOnAuthentication.SuggestPasswordChange");
+		Return Eval("ActionOnThePasswordRequirementsViolationOnAuthentication.SuggestPasswordChange");
 	EndIf;
 	
-	Return Eval("ActionOnPasswordRequirementsViolationOnAuthentication.None");
+	Return Eval("ActionOnThePasswordRequirementsViolationOnAuthentication.None");
 	// ACC:488-on
 	
 EndFunction

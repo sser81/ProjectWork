@@ -1207,8 +1207,8 @@
 			<CommonTemplate>SystemReleaseNotes</CommonTemplate>
 			<CommonTemplate>TagsMapToCommonForms</CommonTemplate>
 			<FilterCriterion>RelatedDocuments</FilterCriterion>
-			<CommonModule>Common</CommonModule>
 			<CommonModule>_DemoDataExchangeEvents</CommonModule>
+			<CommonModule>_DemoExchangeMobileClient</CommonModule>
 			<CommonModule>_DemoExchangeMobileClientClient</CommonModule>
 			<CommonModule>_DemoExchangeMobileClientGlobal</CommonModule>
 			<CommonModule>_DemoExchangeMobileClientOfflineClient</CommonModule>
@@ -1336,7 +1336,7 @@
 			<CommonModule>ClusterAdministrationCOMClientServer</CommonModule>
 			<CommonModule>ClusterAdministrationRAS</CommonModule>
 			<CommonModule>ClusterAdministrationRASClientServer</CommonModule>
-			<CommonModule>_DemoExchangeMobileClient</CommonModule>
+			<CommonModule>Common</CommonModule>
 			<CommonModule>CommonClient</CommonModule>
 			<CommonModule>CommonClientCached</CommonModule>
 			<CommonModule>CommonClientOverridable</CommonModule>
@@ -2838,8 +2838,8 @@
 			<CommonForm>WorkingDirectorySettings</CommonForm>
 			<Catalog>_DemoBankAccounts</Catalog>
 			<Catalog>_DemoCashAccounts</Catalog>
-			<Catalog>_DemoCharacteristics</Catalog>
 			<Catalog>_DemoCashRegisters</Catalog>
+			<Catalog>_DemoCharacteristics</Catalog>
 			<Catalog>_DemoCompanies</Catalog>
 			<Catalog>_DemoCompaniesAttachedFiles</Catalog>
 			<Catalog>_DemoCounterparties</Catalog>
