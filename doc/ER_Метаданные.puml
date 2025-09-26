@@ -7,11 +7,15 @@ title Диаграмма метаданных в подсистеме 'Limits fo
 package "Учетная система" #d3fffbff {
 
     package НСИ <<Frame>> #e4ff99ff {
-        v8_Catalog(Entities){
+        v8_Catalog(_DemoCompanies, "Demo: Companies"){
             Ссылка
         }
 
-        v8_Catalog(Employees){
+        v8_Catalog(_DemoDepartments, "Demo: Departments"){
+            Ссылка
+        }
+
+        v8_Catalog(_DemoIndividuals, "Demo: Individuals"){
             Ссылка
         }
 
@@ -41,7 +45,11 @@ package "Учетная система" #d3fffbff {
         v8_Document(EmploymentContract, "Employment contract"){
             Ссылка
             Entity
+            Department
             Employee
+            Period
+            End-of-Contract Date
+            Employee ID
             --ТЧ Limits for employees--
             TypeOfLimit
             Stage
@@ -49,6 +57,16 @@ package "Учетная система" #d3fffbff {
             LimitDateEnd
             Limit
         }
+
+        v8_InfoRg(_DemoCompaniesEmployees, "Demo: Company employees"){
+            <$d>Регистратор
+            <$d>Organization
+            <$d>Individual
+            <$r>Department_Company
+            <$r>OccupiedRates
+            <$r>EmploymentContract
+            EmployeeCode
+            }
 
         v8_InfoRg(EmployeeLimitPlaning, "Employee limit planing"){
             <$d>Регистратор
@@ -81,15 +99,6 @@ package "Учетная система" #d3fffbff {
             Count
         }
 
-        v8_Document(PaymentExpense, "Bank Payment"){
-            Ссылка
-            Entity
-            Employee
-            StageOfLimit
-            Article : СправочникСсылка.CashFlowItems
-            PaymentAmount
-        }
-
         v8_AccRg(TurnoverByEmployeeLimits, "Turnover by employee limits"){
             <$d>Регистратор
             <$d>Entity
@@ -102,26 +111,26 @@ package "Учетная система" #d3fffbff {
     }
 
 'Ссылки на основные НСИ
-Entities-->EmploymentContract
-Employees-->EmploymentContract
+_DemoCompanies-->EmploymentContract : Entity
+_DemoIndividuals-->EmploymentContract : Employee
 
-Entities-->EmployeeLimitPlaning
-Employees-->EmployeeLimitPlaning
+_DemoCompanies-->_DemoCompaniesEmployees : Organization
+_DemoDepartments-->_DemoCompaniesEmployees : Department_Company
+_DemoIndividuals-->_DemoCompaniesEmployees : Individual
 
-Entities-->Tickets
-Employees-->Tickets
+_DemoCompanies-->EmployeeLimitPlaning : Entity
+_DemoIndividuals-->EmployeeLimitPlaning : Employee
 
-Entities-->ExpenseByLimits
-Employees-->ExpenseByLimits
+_DemoCompanies-->Tickets : Entity
+_DemoIndividuals-->Tickets : Employee
 
-Entities-->PaymentExpense
-Employees-->PaymentExpense
+_DemoCompanies-->ExpenseByLimits : Entity
+_DemoIndividuals-->ExpenseByLimits : Employee
 
-Entities-->TurnoverByEmployeeLimits
-Employees-->TurnoverByEmployeeLimits
+_DemoCompanies-->TurnoverByEmployeeLimits : Entity
+_DemoIndividuals-->TurnoverByEmployeeLimits : Employee
 
 CashFlowItems-down->TypesOfLimitsForEmployees : CashFlowItem
-CashFlowItems-down->PaymentExpense : Article
 
 'Ссылки в этапах
 TypesOfLimitsForEmployees-left->StageOfLimitsForEmployees : TypeOfLimit
@@ -129,6 +138,8 @@ EmploymentContract-->StageOfLimitsForEmployees : EmploymentContract
 
 'Установка лимитов
 TypesOfLimitsForEmployees-->EmploymentContract : TypeOfLimit
+
+EmploymentContract-->_DemoCompaniesEmployees : EmploymentContract
 
 TypesOfLimitsForEmployees-->EmployeeLimitPlaning : TypeOfLimit
 StageOfLimitsForEmployees-down->EmployeeLimitPlaning : Stage
@@ -141,13 +152,11 @@ StageOfLimitsForEmployees-->ExpenseByLimits : Stage
 TypesOfLimitsForEmployees-->Tickets : TypeOfLimits
 StageOfLimitsForEmployees-->Tickets : StageOfLimit
 
-StageOfLimitsForEmployees-->PaymentExpense : StageOfLimit
-
 TypesOfLimitsForEmployees-->TurnoverByEmployeeLimits : TypeOfLimit
 StageOfLimitsForEmployees-->TurnoverByEmployeeLimits : Stage
+
 ExpenseByLimits -->TurnoverByEmployeeLimits
 Tickets-->TurnoverByEmployeeLimits
-PaymentExpense-->TurnoverByEmployeeLimits
 
 }
 
@@ -195,8 +204,5 @@ package СЭД #d3fffbff {
     СтатьиДвиженияДенежныхСредств-down->ДокументыПредприятия : СтатьяДвиженияДенежныхСредств
     ЭтапыЛимитовСотрудников-left->ДокументыПредприятия : Этап
 }
-
-СЭД-down..>"Учетная система" : Данные о запросе на возмещение расходов
-"Учетная система".up.>СЭД : Данные об остатках лимитов
 
 @enduml
