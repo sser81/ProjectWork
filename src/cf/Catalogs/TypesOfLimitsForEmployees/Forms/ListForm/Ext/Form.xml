@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<ChildItems>
+		<UsualGroup name="ListSettingsComposerUserSettings" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Группа пользовательских настроек</v8:content>
+				</v8:item>
+			</Title>
+			<VerticalStretch>false</VerticalStretch>
+			<Group>Vertical</Group>
+			<ShowTitle>false</ShowTitle>
+			<ExtendedTooltip name="ListSettingsComposerUserSettingsExtendedTooltip" id="2"/>
+		</UsualGroup>
+		<Table name="List" id="3">
+			<Representation>List</Representation>
+			<CommandBarLocation>None</CommandBarLocation>
+			<DefaultItem>true</DefaultItem>
+			<UseAlternationRowColor>true</UseAlternationRowColor>
+			<InitialTreeView>ExpandTopLevel</InitialTreeView>
+			<EnableStartDrag>true</EnableStartDrag>
+			<DataPath>List</DataPath>
+			<RowPictureDataPath>List.DefaultPicture</RowPictureDataPath>
+			<AutoRefresh>false</AutoRefresh>
+			<AutoRefreshPeriod>60</AutoRefreshPeriod>
+			<Period>
+				<v8:variant xsi:type="v8:StandardPeriodVariant">Custom</v8:variant>
+				<v8:startDate>0001-01-01T00:00:00</v8:startDate>
+				<v8:endDate>0001-01-01T00:00:00</v8:endDate>
+			</Period>
+			<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
+			<RestoreCurrentRow>false</RestoreCurrentRow>
+			<TopLevelParent xsi:nil="true"/>
+			<ShowRoot>true</ShowRoot>
+			<AllowRootChoice>false</AllowRootChoice>
+			<UpdateOnDataChange>Auto</UpdateOnDataChange>
+			<UserSettingsGroup>ListSettingsComposerUserSettings</UserSettingsGroup>
+			<AllowGettingCurrentRowURL>true</AllowGettingCurrentRowURL>
+			<ContextMenu name="ListContextMenu" id="4"/>
+			<AutoCommandBar name="ListCommandBar" id="5">
+				<Autofill>false</Autofill>
+			</AutoCommandBar>
+			<ExtendedTooltip name="ListExtendedTooltip" id="6"/>
+			<SearchStringAddition name="ListSearchString" id="7">
+				<AdditionSource>
+					<Item>List</Item>
+					<Type>SearchStringRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="ListSearchStringContextMenu" id="8"/>
+				<ExtendedTooltip name="ListSearchStringExtendedTooltip" id="9"/>
+			</SearchStringAddition>
+			<ViewStatusAddition name="ListViewStatus" id="10">
+				<AdditionSource>
+					<Item>List</Item>
+					<Type>ViewStatusRepresentation</Type>
+				</AdditionSource>
+				<ContextMenu name="ListViewStatusContextMenu" id="11"/>
+				<ExtendedTooltip name="ListViewStatusExtendedTooltip" id="12"/>
+			</ViewStatusAddition>
+			<SearchControlAddition name="ListSearchControl" id="13">
+				<AdditionSource>
+					<Item>List</Item>
+					<Type>SearchControl</Type>
+				</AdditionSource>
+				<ContextMenu name="ListSearchControlContextMenu" id="14"/>
+				<ExtendedTooltip name="ListSearchControlExtendedTooltip" id="15"/>
+			</SearchControlAddition>
+			<ChildItems>
+				<LabelField name="Description" id="16">
+					<DataPath>List.Description</DataPath>
+					<DefaultItem>true</DefaultItem>
+					<ContextMenu name="DescriptionContextMenu" id="17"/>
+					<ExtendedTooltip name="DescriptionExtendedTooltip" id="18"/>
+				</LabelField>
+				<LabelField name="Code" id="19">
+					<DataPath>List.Code</DataPath>
+					<ContextMenu name="CodeContextMenu" id="20"/>
+					<ExtendedTooltip name="CodeExtendedTooltip" id="21"/>
+				</LabelField>
+				<LabelField name="ResourceType" id="31">
+					<DataPath>List.ResourceType</DataPath>
+					<Title>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Resource</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Ресурс</v8:content>
+						</v8:item>
+					</Title>
+					<HorizontalAlign>Left</HorizontalAlign>
+					<ContextMenu name="ResourceTypeContextMenu" id="32"/>
+					<ExtendedTooltip name="ResourceTypeExtendedTooltip" id="33"/>
+				</LabelField>
+				<CheckBoxField name="CloseUponDismissal" id="22">
+					<DataPath>List.CloseUponDismissal</DataPath>
+					<CheckBoxType>Auto</CheckBoxType>
+					<ContextMenu name="CloseUponDismissalContextMenu" id="23"/>
+					<ExtendedTooltip name="CloseUponDismissalExtendedTooltip" id="24"/>
+				</CheckBoxField>
+				<LabelField name="ExpenseItem" id="25">
+					<DataPath>List.ExpenseItem</DataPath>
+					<ContextMenu name="ExpenseItemContextMenu" id="26"/>
+					<ExtendedTooltip name="ExpenseItemExtendedTooltip" id="27"/>
+				</LabelField>
+				<LabelField name="CashFlowItem" id="34">
+					<DataPath>List.CashFlowItem</DataPath>
+					<ContextMenu name="CashFlowItemContextMenu" id="35"/>
+					<ExtendedTooltip name="CashFlowItemExtendedTooltip" id="36"/>
+				</LabelField>
+				<CheckBoxField name="OneTime" id="28">
+					<DataPath>List.OneTime</DataPath>
+					<CheckBoxType>Auto</CheckBoxType>
+					<ContextMenu name="OneTimeContextMenu" id="29"/>
+					<ExtendedTooltip name="OneTimeExtendedTooltip" id="30"/>
+				</CheckBoxField>
+			</ChildItems>
+		</Table>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="List" id="1">
+			<Type>
+				<v8:Type>cfg:DynamicList</v8:Type>
+			</Type>
+			<MainAttribute>true</MainAttribute>
+			<Settings xsi:type="DynamicList">
+				<ManualQuery>true</ManualQuery>
+				<DynamicDataRead>true</DynamicDataRead>
+				<QueryText>SELECT
+	CatalogTypesOfLimitsForEmployees.Ref AS Ref,
+	CatalogTypesOfLimitsForEmployees.DeletionMark AS DeletionMark,
+	CatalogTypesOfLimitsForEmployees.Code AS Code,
+	CatalogTypesOfLimitsForEmployees.Description AS Description,
+	CatalogTypesOfLimitsForEmployees.AmountLimitControl AS AmountLimitControl,
+	CatalogTypesOfLimitsForEmployees.CountLimitControl AS CountLimitControl,
+	CatalogTypesOfLimitsForEmployees.CloseUponDismissal AS CloseUponDismissal,
+	CatalogTypesOfLimitsForEmployees.ExpenseItem AS ExpenseItem,
+	CatalogTypesOfLimitsForEmployees.CashFlowItem AS CashFlowItem,
+	CatalogTypesOfLimitsForEmployees.OneTime AS OneTime,
+	CatalogTypesOfLimitsForEmployees.Predefined AS Predefined,
+	CatalogTypesOfLimitsForEmployees.PredefinedDataName AS PredefinedDataName,
+	CASE
+		WHEN CatalogTypesOfLimitsForEmployees.CountLimitControl
+			THEN 1
+		WHEN CatalogTypesOfLimitsForEmployees.CheckLimitControl
+			THEN 2
+		ELSE 0
+	END AS ResourceType
+FROM
+	Catalog.TypesOfLimitsForEmployees AS CatalogTypesOfLimitsForEmployees</QueryText>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>CountLimitControl</dcssch:dataPath>
+					<dcssch:field>CountLimitControl</dcssch:field>
+				</Field>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>Ref</dcssch:dataPath>
+					<dcssch:field>Ref</dcssch:field>
+				</Field>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>ExpenseItem</dcssch:dataPath>
+					<dcssch:field>ExpenseItem</dcssch:field>
+				</Field>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>DeletionMark</dcssch:dataPath>
+					<dcssch:field>DeletionMark</dcssch:field>
+				</Field>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>Code</dcssch:dataPath>
+					<dcssch:field>Code</dcssch:field>
+				</Field>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>Description</dcssch:dataPath>
+					<dcssch:field>Description</dcssch:field>
+				</Field>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>AmountLimitControl</dcssch:dataPath>
+					<dcssch:field>AmountLimitControl</dcssch:field>
+				</Field>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>OneTime</dcssch:dataPath>
+					<dcssch:field>OneTime</dcssch:field>
+				</Field>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>CloseUponDismissal</dcssch:dataPath>
+					<dcssch:field>CloseUponDismissal</dcssch:field>
+				</Field>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>Predefined</dcssch:dataPath>
+					<dcssch:field>Predefined</dcssch:field>
+				</Field>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>PredefinedDataName</dcssch:dataPath>
+					<dcssch:field>PredefinedDataName</dcssch:field>
+				</Field>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>ResourceType</dcssch:dataPath>
+					<dcssch:field>ResourceType</dcssch:field>
+					<dcssch:title xsi:type="v8:LocalStringType">
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Resource type</v8:content>
+						</v8:item>
+					</dcssch:title>
+					<dcssch:presentationExpression>CASE WHEN ResourceType = 1 THEN НСтр("ru = 'Количество'; en = 'Count'") WHEN ResourceType = 2 THEN НСтр("ru = 'Пометка'; en = 'Check'") ELSE НСтр("ru = 'Сумма'; en = 'Amount'") END</dcssch:presentationExpression>
+				</Field>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>CashFlowItem</dcssch:dataPath>
+					<dcssch:field>CashFlowItem</dcssch:field>
+				</Field>
+				<Field xsi:type="dcssch:DataSetFieldField">
+					<dcssch:dataPath>CheckLimitControl</dcssch:dataPath>
+					<dcssch:field>CheckLimitControl</dcssch:field>
+				</Field>
+				<MainTable>Catalog.TypesOfLimitsForEmployees</MainTable>
+				<ListSettings>
+					<dcsset:filter>
+						<dcsset:viewMode>Normal</dcsset:viewMode>
+						<dcsset:userSettingID>dfcece9d-5077-440b-b6b3-45a5cb4538eb</dcsset:userSettingID>
+					</dcsset:filter>
+					<dcsset:order>
+						<dcsset:viewMode>Normal</dcsset:viewMode>
+						<dcsset:userSettingID>88619765-ccb3-46c6-ac52-38e9c992ebd4</dcsset:userSettingID>
+					</dcsset:order>
+					<dcsset:conditionalAppearance>
+						<dcsset:viewMode>Normal</dcsset:viewMode>
+						<dcsset:userSettingID>b75fecce-942b-4aed-abc9-e6a02e460fb3</dcsset:userSettingID>
+					</dcsset:conditionalAppearance>
+					<dcsset:itemsViewMode>Normal</dcsset:itemsViewMode>
+					<dcsset:itemsUserSettingID>911b6018-f537-43e8-a417-da56b22f9aec</dcsset:itemsUserSettingID>
+				</ListSettings>
+			</Settings>
+		</Attribute>
+	</Attributes>
+</Form>
