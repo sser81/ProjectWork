@@ -299,6 +299,7 @@
 			<Subsystem>OnlineUserSupport</Subsystem>
 			<Subsystem>ServiceAdministration</Subsystem>
 			<Subsystem>StandardSubsystems</Subsystem>
+			<Subsystem>LimitsForEmployees</Subsystem>
 			<StyleItem>ActionInListColumnFont</StyleItem>
 			<StyleItem>AddedAttribute_SSLym</StyleItem>
 			<StyleItem>AddedAttributeBackground</StyleItem>
@@ -1924,6 +1925,10 @@
 			<CommonModule>XDTOTranslationOverridable</CommonModule>
 			<CommonModule>YandexTranslate</CommonModule>
 			<CommonModule>ZipArchives</CommonModule>
+			<CommonModule>ConditionalAppearanceServer</CommonModule>
+			<CommonModule>DocumentPosting</CommonModule>
+			<CommonModule>LimitsForEmployeesClient</CommonModule>
+			<CommonModule>LimitsForEmployeesServer</CommonModule>
 			<CommonAttribute>CommentLanguage1</CommonAttribute>
 			<CommonAttribute>CommentLanguage2</CommonAttribute>
 			<CommonAttribute>DescriptionLanguage1</CommonAttribute>
@@ -2944,6 +2949,9 @@
 			<Catalog>WorldCountries</Catalog>
 			<Catalog>Delete_DemoCommonInfoRecords</Catalog>
 			<Catalog>DeleteJobsQueue</Catalog>
+			<Catalog>CashFlowItems</Catalog>
+			<Catalog>StageOfLimitsForEmployees</Catalog>
+			<Catalog>TypesOfLimitsForEmployees</Catalog>
 			<Document>_DemoCashVoucher</Document>
 			<Document>_DemoCustomerProformaInvoice</Document>
 			<Document>_DemoDebitingFromAccount</Document>
@@ -2966,6 +2974,9 @@
 			<Document>PollPurpose</Document>
 			<Document>Questionnaire</Document>
 			<Document>SMSMessage</Document>
+			<Document>ExpenseByLimits</Document>
+			<Document>EmploymentContract</Document>
+			<Document>Tickets</Document>
 			<Sequence>_DemoGoodsMovement</Sequence>
 			<DocumentJournal>_DemoAllDocumentsJournal</DocumentJournal>
 			<DocumentJournal>_DemoWarehouseDocuments</DocumentJournal>
@@ -3129,6 +3140,7 @@
 			<Report>UsersByDepartments</Report>
 			<Report>UsersInfo</Report>
 			<Report>VolumeIntegrityCheck</Report>
+			<Report>ExpensesOfLimits</Report>
 			<DataProcessor>_DemoAddInOperations</DataProcessor>
 			<DataProcessor>_DemoAdministrationPanel</DataProcessor>
 			<DataProcessor>_DemoBarcodeGeneration</DataProcessor>
@@ -3487,8 +3499,10 @@
 			<InformationRegister>DeleteSummaryApplicationsObjectsExportOrder</InformationRegister>
 			<InformationRegister>DeleteSummaryApplicationsUploadState</InformationRegister>
 			<InformationRegister>DeleteTimeMeasurements3</InformationRegister>
+			<InformationRegister>EmployeeLimitPlaning</InformationRegister>
 			<AccumulationRegister>_DemoGoodsBalancesInStorageLocations</AccumulationRegister>
 			<AccumulationRegister>_DemoProformaInvoicesTurnovers</AccumulationRegister>
+			<AccumulationRegister>TurnoverByEmployeeLimits</AccumulationRegister>
 			<ChartOfCharacteristicTypes>_DemoExtDimensionTypes</ChartOfCharacteristicTypes>
 			<ChartOfCharacteristicTypes>AdditionalAttributesAndInfo</ChartOfCharacteristicTypes>
 			<ChartOfCharacteristicTypes>PeriodClosingDatesSections</ChartOfCharacteristicTypes>

@@ -1,51 +1,50 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
-	<InformationRegister uuid="75f8933c-34ec-42f0-9f27-16e5b2b103b9">
+	<AccumulationRegister uuid="0b0edc12-1ca3-4af1-bb0b-9a33437e9880">
 		<InternalInfo>
-			<xr:GeneratedType name="InformationRegisterRecord._DemoCompaniesEmployees" category="Record">
-				<xr:TypeId>195f6cd5-61f6-41b5-a1ab-80e20602bc9d</xr:TypeId>
-				<xr:ValueId>ac7ddb9b-1237-4f59-bae6-780dd16ea909</xr:ValueId>
+			<xr:GeneratedType name="AccumulationRegisterRecord.TurnoverByEmployeeLimits" category="Record">
+				<xr:TypeId>cf8e6b3b-22fa-439b-9a4f-d60ec3568e7b</xr:TypeId>
+				<xr:ValueId>5c042fdf-a609-4b70-bdce-a332ef71deb3</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="InformationRegisterManager._DemoCompaniesEmployees" category="Manager">
-				<xr:TypeId>e9e9cabe-d416-463c-b5f7-8f8d19b19ce6</xr:TypeId>
-				<xr:ValueId>95eb1d05-7381-44d4-b3c3-cddfe29f5a5a</xr:ValueId>
+			<xr:GeneratedType name="AccumulationRegisterManager.TurnoverByEmployeeLimits" category="Manager">
+				<xr:TypeId>d7b5c3a9-be0a-4788-983a-0bd48e7d67ff</xr:TypeId>
+				<xr:ValueId>0ea6bf2c-f9a3-46a8-91aa-91d38ac6199f</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="InformationRegisterSelection._DemoCompaniesEmployees" category="Selection">
-				<xr:TypeId>b015d087-384b-4a38-b990-331d11be8616</xr:TypeId>
-				<xr:ValueId>7914aa02-26ea-408e-a985-ded097fe65d3</xr:ValueId>
+			<xr:GeneratedType name="AccumulationRegisterSelection.TurnoverByEmployeeLimits" category="Selection">
+				<xr:TypeId>b4b6d2ea-51f7-47fa-b53c-33ccb9285d5b</xr:TypeId>
+				<xr:ValueId>9840656e-3eac-49c5-966d-21ac7dcf4312</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="InformationRegisterList._DemoCompaniesEmployees" category="List">
-				<xr:TypeId>41002888-4bfa-4f67-b74d-100e35657a6b</xr:TypeId>
-				<xr:ValueId>c02fc4fa-35b3-494f-83ef-94f86da3d371</xr:ValueId>
+			<xr:GeneratedType name="AccumulationRegisterList.TurnoverByEmployeeLimits" category="List">
+				<xr:TypeId>ff269ab3-ee71-4dba-a787-9d1159798303</xr:TypeId>
+				<xr:ValueId>0c51c5e4-485f-4863-9e48-71adf5f74378</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="InformationRegisterRecordSet._DemoCompaniesEmployees" category="RecordSet">
-				<xr:TypeId>ae7029b9-a9b1-4e49-89da-5057f17fc747</xr:TypeId>
-				<xr:ValueId>e3b3d00f-56c4-4334-96e6-1d2861393d60</xr:ValueId>
+			<xr:GeneratedType name="AccumulationRegisterRecordSet.TurnoverByEmployeeLimits" category="RecordSet">
+				<xr:TypeId>970094b5-0c41-499d-8009-81c07ae70156</xr:TypeId>
+				<xr:ValueId>c1e4be1f-b9a7-4706-8b26-a71c1f183fe2</xr:ValueId>
 			</xr:GeneratedType>
-			<xr:GeneratedType name="InformationRegisterRecordKey._DemoCompaniesEmployees" category="RecordKey">
-				<xr:TypeId>1d4bbca2-4939-486b-8686-ff374c1551ff</xr:TypeId>
-				<xr:ValueId>f94c46e0-cdb8-4573-abcd-6f0f6e40e725</xr:ValueId>
-			</xr:GeneratedType>
-			<xr:GeneratedType name="InformationRegisterRecordManager._DemoCompaniesEmployees" category="RecordManager">
-				<xr:TypeId>86438930-9e90-4dc0-b62c-1665932b2d61</xr:TypeId>
-				<xr:ValueId>dc98ea30-f174-4c59-aa69-8b508b6ac907</xr:ValueId>
+			<xr:GeneratedType name="AccumulationRegisterRecordKey.TurnoverByEmployeeLimits" category="RecordKey">
+				<xr:TypeId>79276594-9824-4176-bfa7-0a3153bf5498</xr:TypeId>
+				<xr:ValueId>dc660f8c-059b-4ab9-a533-f0462aa76827</xr:ValueId>
 			</xr:GeneratedType>
 		</InternalInfo>
 		<Properties>
-			<Name>_DemoCompaniesEmployees</Name>
+			<Name>TurnoverByEmployeeLimits</Name>
 			<Synonym>
 				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Demo: Company employees</v8:content>
+					<v8:content>Turnover by employee limits</v8:content>
+				</v8:item>
+				<v8:item>
+					<v8:lang>ru</v8:lang>
+					<v8:content>Обороты по лимитам сотрудников (GMS)</v8:content>
 				</v8:item>
 			</Synonym>
 			<Comment/>
-			<UseStandardCommands>true</UseStandardCommands>
-			<EditType>InDialog</EditType>
-			<DefaultRecordForm/>
-			<DefaultListForm>InformationRegister._DemoCompaniesEmployees.Form.ListForm</DefaultListForm>
-			<AuxiliaryRecordForm/>
+			<UseStandardCommands>false</UseStandardCommands>
+			<DefaultListForm/>
 			<AuxiliaryListForm/>
+			<RegisterType>Turnovers</RegisterType>
+			<IncludeHelpInContents>false</IncludeHelpInContents>
 			<StandardAttributes>
 				<xr:StandardAttribute name="Active">
 					<xr:LinkByType/>
@@ -136,12 +135,7 @@
 					<xr:CreateOnInput>Auto</xr:CreateOnInput>
 					<xr:TypeReductionMode>TransformValues</xr:TypeReductionMode>
 					<xr:MaxValue xsi:nil="true"/>
-					<xr:ToolTip>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Change date</v8:content>
-						</v8:item>
-					</xr:ToolTip>
+					<xr:ToolTip/>
 					<xr:ExtendedEdit>false</xr:ExtendedEdit>
 					<xr:Format/>
 					<xr:ChoiceForm/>
@@ -161,137 +155,35 @@
 					<xr:ChoiceParameters/>
 				</xr:StandardAttribute>
 			</StandardAttributes>
-			<InformationRegisterPeriodicity>RecorderPosition</InformationRegisterPeriodicity>
-			<WriteMode>RecorderSubordinate</WriteMode>
-			<MainFilterOnPeriod>false</MainFilterOnPeriod>
-			<IncludeHelpInContents>false</IncludeHelpInContents>
 			<DataLockControlMode>Managed</DataLockControlMode>
 			<FullTextSearch>DontUse</FullTextSearch>
-			<EnableTotalsSliceFirst>false</EnableTotalsSliceFirst>
-			<EnableTotalsSliceLast>false</EnableTotalsSliceLast>
-			<RecordPresentation/>
-			<ExtendedRecordPresentation/>
+			<EnableTotalsSplitting>true</EnableTotalsSplitting>
 			<ListPresentation/>
 			<ExtendedListPresentation/>
 			<Explanation/>
-			<DataHistory>DontUse</DataHistory>
-			<UpdateDataHistoryImmediatelyAfterWrite>false</UpdateDataHistoryImmediatelyAfterWrite>
-			<ExecuteAfterWriteDataHistoryVersionProcessing>false</ExecuteAfterWriteDataHistoryVersionProcessing>
 		</Properties>
 		<ChildObjects>
-			<Resource uuid="cd8c038e-4fba-46b4-93c2-d45bf433d326">
+			<Resource uuid="4bc8cfb9-1de5-45c2-bd11-4cdfa3cae3cd">
 				<Properties>
-					<Name>Department_Company</Name>
+					<Name>Limit</Name>
 					<Synonym>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Company department</v8:content>
+							<v8:content>Limit</v8:content>
 						</v8:item>
-					</Synonym>
-					<Comment/>
-					<Type>
-						<v8:Type>cfg:CatalogRef._DemoDepartments</v8:Type>
-					</Type>
-					<PasswordMode>false</PasswordMode>
-					<Format/>
-					<EditFormat/>
-					<ToolTip>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Company department which an employee refers to</v8:content>
-						</v8:item>
-					</ToolTip>
-					<MarkNegatives>false</MarkNegatives>
-					<Mask/>
-					<MultiLine>false</MultiLine>
-					<ExtendedEdit>false</ExtendedEdit>
-					<MinValue xsi:nil="true"/>
-					<MaxValue xsi:nil="true"/>
-					<FillFromFillingValue>false</FillFromFillingValue>
-					<FillValue xsi:nil="true"/>
-					<FillChecking>DontCheck</FillChecking>
-					<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
-					<ChoiceParameterLinks/>
-					<ChoiceParameters/>
-					<QuickChoice>Auto</QuickChoice>
-					<CreateOnInput>Auto</CreateOnInput>
-					<ChoiceForm/>
-					<LinkByType/>
-					<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
-					<Indexing>DontIndex</Indexing>
-					<FullTextSearch>Use</FullTextSearch>
-					<DataHistory>Use</DataHistory>
-				</Properties>
-			</Resource>
-			<Resource uuid="90d89731-6e90-4119-ad04-f4915c2741fe">
-				<Properties>
-					<Name>OccupiedRates</Name>
-					<Synonym>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Occupied rates</v8:content>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Лимит</v8:content>
 						</v8:item>
 					</Synonym>
 					<Comment/>
 					<Type>
 						<v8:Type>xs:decimal</v8:Type>
 						<v8:NumberQualifiers>
-							<v8:Digits>4</v8:Digits>
+							<v8:Digits>15</v8:Digits>
 							<v8:FractionDigits>2</v8:FractionDigits>
-							<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+							<v8:AllowedSign>Any</v8:AllowedSign>
 						</v8:NumberQualifiers>
-					</Type>
-					<PasswordMode>false</PasswordMode>
-					<Format/>
-					<EditFormat/>
-					<ToolTip>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Number of occupied rates</v8:content>
-						</v8:item>
-					</ToolTip>
-					<MarkNegatives>false</MarkNegatives>
-					<Mask/>
-					<MultiLine>false</MultiLine>
-					<ExtendedEdit>false</ExtendedEdit>
-					<MinValue xsi:nil="true"/>
-					<MaxValue xsi:nil="true"/>
-					<FillFromFillingValue>false</FillFromFillingValue>
-					<FillValue xsi:nil="true"/>
-					<FillChecking>DontCheck</FillChecking>
-					<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
-					<ChoiceParameterLinks/>
-					<ChoiceParameters/>
-					<QuickChoice>Auto</QuickChoice>
-					<CreateOnInput>Auto</CreateOnInput>
-					<ChoiceForm/>
-					<LinkByType/>
-					<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
-					<Indexing>DontIndex</Indexing>
-					<FullTextSearch>Use</FullTextSearch>
-					<DataHistory>Use</DataHistory>
-				</Properties>
-			</Resource>
-			<Resource uuid="6340c8cb-7065-4941-bca5-3e2685c33db4">
-				<Properties>
-					<Name>EmploymentContract</Name>
-					<Synonym>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Employment Contract</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ru</v8:lang>
-							<v8:content>Прием на работу</v8:content>
-						</v8:item>
-						<v8:item>
-							<v8:lang>ar</v8:lang>
-							<v8:content>عقد العمل</v8:content>
-						</v8:item>
-					</Synonym>
-					<Comment/>
-					<Type>
-						<v8:Type>cfg:DocumentRef.EmploymentContract</v8:Type>
 					</Type>
 					<PasswordMode>false</PasswordMode>
 					<Format/>
@@ -303,8 +195,6 @@
 					<ExtendedEdit>false</ExtendedEdit>
 					<MinValue xsi:nil="true"/>
 					<MaxValue xsi:nil="true"/>
-					<FillFromFillingValue>false</FillFromFillingValue>
-					<FillValue xsi:nil="true"/>
 					<FillChecking>DontCheck</FillChecking>
 					<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
 					<ChoiceParameterLinks/>
@@ -314,66 +204,24 @@
 					<ChoiceForm/>
 					<LinkByType/>
 					<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
-					<Indexing>DontIndex</Indexing>
 					<FullTextSearch>Use</FullTextSearch>
-					<DataHistory>Use</DataHistory>
 				</Properties>
 			</Resource>
-			<Attribute uuid="c08e2e4e-5bab-4636-9fe1-70852eb52529">
+			<Dimension uuid="43511f70-90e0-4dfb-9173-d01e047cd8e1">
 				<Properties>
-					<Name>EmployeeCode</Name>
+					<Name>Entity</Name>
 					<Synonym>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Employee ID</v8:content>
+							<v8:content>Entity</v8:content>
 						</v8:item>
-					</Synonym>
-					<Comment/>
-					<Type>
-						<v8:Type>xs:string</v8:Type>
-						<v8:StringQualifiers>
-							<v8:Length>10</v8:Length>
-							<v8:AllowedLength>Variable</v8:AllowedLength>
-						</v8:StringQualifiers>
-					</Type>
-					<PasswordMode>false</PasswordMode>
-					<Format/>
-					<EditFormat/>
-					<ToolTip>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Employee ID in a company</v8:content>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Организация</v8:content>
 						</v8:item>
-					</ToolTip>
-					<MarkNegatives>false</MarkNegatives>
-					<Mask/>
-					<MultiLine>false</MultiLine>
-					<ExtendedEdit>false</ExtendedEdit>
-					<MinValue xsi:nil="true"/>
-					<MaxValue xsi:nil="true"/>
-					<FillFromFillingValue>false</FillFromFillingValue>
-					<FillValue xsi:type="xs:string"/>
-					<FillChecking>DontCheck</FillChecking>
-					<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
-					<ChoiceParameterLinks/>
-					<ChoiceParameters/>
-					<QuickChoice>Auto</QuickChoice>
-					<CreateOnInput>Auto</CreateOnInput>
-					<ChoiceForm/>
-					<LinkByType/>
-					<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
-					<Indexing>DontIndex</Indexing>
-					<FullTextSearch>Use</FullTextSearch>
-					<DataHistory>Use</DataHistory>
-				</Properties>
-			</Attribute>
-			<Dimension uuid="949cdbee-b20b-492f-b628-9283e8e280bb">
-				<Properties>
-					<Name>Organization</Name>
-					<Synonym>
 						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Company</v8:content>
+							<v8:lang>ar</v8:lang>
+							<v8:content>الكيان</v8:content>
 						</v8:item>
 					</Synonym>
 					<Comment/>
@@ -383,21 +231,14 @@
 					<PasswordMode>false</PasswordMode>
 					<Format/>
 					<EditFormat/>
-					<ToolTip>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Company where an employee works</v8:content>
-						</v8:item>
-					</ToolTip>
+					<ToolTip/>
 					<MarkNegatives>false</MarkNegatives>
 					<Mask/>
 					<MultiLine>false</MultiLine>
 					<ExtendedEdit>false</ExtendedEdit>
 					<MinValue xsi:nil="true"/>
 					<MaxValue xsi:nil="true"/>
-					<FillFromFillingValue>true</FillFromFillingValue>
-					<FillValue xsi:type="xr:DesignTimeRef">Catalog._DemoCompanies.EmptyRef</FillValue>
-					<FillChecking>ShowError</FillChecking>
+					<FillChecking>DontCheck</FillChecking>
 					<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
 					<ChoiceParameterLinks/>
 					<ChoiceParameters/>
@@ -406,22 +247,19 @@
 					<ChoiceForm/>
 					<LinkByType/>
 					<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
-					<Master>true</Master>
-					<MainFilter>true</MainFilter>
-					<DenyIncompleteValues>true</DenyIncompleteValues>
+					<DenyIncompleteValues>false</DenyIncompleteValues>
 					<Indexing>DontIndex</Indexing>
 					<FullTextSearch>Use</FullTextSearch>
-					<DataHistory>Use</DataHistory>
-					<TypeReductionMode>TransformValues</TypeReductionMode>
+					<UseInTotals>true</UseInTotals>
 				</Properties>
 			</Dimension>
-			<Dimension uuid="2c151380-a56f-47a3-9cdd-4dbe733f96c6">
+			<Dimension uuid="073571e6-a105-43bb-8bfd-4ded593a64b7">
 				<Properties>
-					<Name>Individual</Name>
+					<Name>Employee</Name>
 					<Synonym>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Individual</v8:content>
+							<v8:content>Employee</v8:content>
 						</v8:item>
 					</Synonym>
 					<Comment/>
@@ -431,21 +269,14 @@
 					<PasswordMode>false</PasswordMode>
 					<Format/>
 					<EditFormat/>
-					<ToolTip>
-						<v8:item>
-							<v8:lang>en</v8:lang>
-							<v8:content>Employee</v8:content>
-						</v8:item>
-					</ToolTip>
+					<ToolTip/>
 					<MarkNegatives>false</MarkNegatives>
 					<Mask/>
 					<MultiLine>false</MultiLine>
 					<ExtendedEdit>false</ExtendedEdit>
 					<MinValue xsi:nil="true"/>
 					<MaxValue xsi:nil="true"/>
-					<FillFromFillingValue>false</FillFromFillingValue>
-					<FillValue xsi:type="xr:DesignTimeRef">Catalog._DemoIndividuals.EmptyRef</FillValue>
-					<FillChecking>ShowError</FillChecking>
+					<FillChecking>DontCheck</FillChecking>
 					<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
 					<ChoiceParameterLinks/>
 					<ChoiceParameters/>
@@ -454,40 +285,92 @@
 					<ChoiceForm/>
 					<LinkByType/>
 					<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
-					<Master>false</Master>
-					<MainFilter>true</MainFilter>
-					<DenyIncompleteValues>true</DenyIncompleteValues>
+					<DenyIncompleteValues>false</DenyIncompleteValues>
 					<Indexing>DontIndex</Indexing>
 					<FullTextSearch>Use</FullTextSearch>
-					<DataHistory>Use</DataHistory>
-					<TypeReductionMode>TransformValues</TypeReductionMode>
+					<UseInTotals>true</UseInTotals>
 				</Properties>
 			</Dimension>
-			<Form>RecordForm</Form>
-			<Form>ListForm</Form>
-			<Command uuid="41ae7b90-8afb-44ea-b795-dc7e2d2535be">
+			<Dimension uuid="e75d5810-1066-4623-9479-54f194e8a6f8">
 				<Properties>
-					<Name>_DemoCompanyEmployees</Name>
+					<Name>TypeOfLimit</Name>
 					<Synonym>
 						<v8:item>
 							<v8:lang>en</v8:lang>
-							<v8:content>Demo: Employees</v8:content>
+							<v8:content>Type of limit</v8:content>
 						</v8:item>
 					</Synonym>
 					<Comment/>
-					<Group>FormNavigationPanelGoTo</Group>
-					<CommandParameterType>
-						<v8:Type>cfg:CatalogRef._DemoCompanies</v8:Type>
-					</CommandParameterType>
-					<ParameterUseMode>Single</ParameterUseMode>
-					<ModifiesData>false</ModifiesData>
-					<Representation>Auto</Representation>
+					<Type>
+						<v8:Type>cfg:CatalogRef.TypesOfLimitsForEmployees</v8:Type>
+					</Type>
+					<PasswordMode>false</PasswordMode>
+					<Format/>
+					<EditFormat/>
 					<ToolTip/>
-					<Picture/>
-					<Shortcut/>
-					<OnMainServerUnavalableBehavior>Auto</OnMainServerUnavalableBehavior>
+					<MarkNegatives>false</MarkNegatives>
+					<Mask/>
+					<MultiLine>false</MultiLine>
+					<ExtendedEdit>false</ExtendedEdit>
+					<MinValue xsi:nil="true"/>
+					<MaxValue xsi:nil="true"/>
+					<FillChecking>DontCheck</FillChecking>
+					<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
+					<ChoiceParameterLinks/>
+					<ChoiceParameters/>
+					<QuickChoice>Auto</QuickChoice>
+					<CreateOnInput>Auto</CreateOnInput>
+					<ChoiceForm/>
+					<LinkByType/>
+					<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
+					<DenyIncompleteValues>false</DenyIncompleteValues>
+					<Indexing>DontIndex</Indexing>
+					<FullTextSearch>Use</FullTextSearch>
+					<UseInTotals>true</UseInTotals>
 				</Properties>
-			</Command>
+			</Dimension>
+			<Dimension uuid="6cf30875-1be6-4f2d-831b-5f0c642ea44d">
+				<Properties>
+					<Name>Stage</Name>
+					<Synonym>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Stage</v8:content>
+						</v8:item>
+						<v8:item>
+							<v8:lang>ru</v8:lang>
+							<v8:content>Этап</v8:content>
+						</v8:item>
+					</Synonym>
+					<Comment/>
+					<Type>
+						<v8:Type>cfg:CatalogRef.StageOfLimitsForEmployees</v8:Type>
+					</Type>
+					<PasswordMode>false</PasswordMode>
+					<Format/>
+					<EditFormat/>
+					<ToolTip/>
+					<MarkNegatives>false</MarkNegatives>
+					<Mask/>
+					<MultiLine>false</MultiLine>
+					<ExtendedEdit>false</ExtendedEdit>
+					<MinValue xsi:nil="true"/>
+					<MaxValue xsi:nil="true"/>
+					<FillChecking>DontCheck</FillChecking>
+					<ChoiceFoldersAndItems>Items</ChoiceFoldersAndItems>
+					<ChoiceParameterLinks/>
+					<ChoiceParameters/>
+					<QuickChoice>Auto</QuickChoice>
+					<CreateOnInput>Auto</CreateOnInput>
+					<ChoiceForm/>
+					<LinkByType/>
+					<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
+					<DenyIncompleteValues>false</DenyIncompleteValues>
+					<Indexing>DontIndex</Indexing>
+					<FullTextSearch>Use</FullTextSearch>
+					<UseInTotals>true</UseInTotals>
+				</Properties>
+			</Dimension>
 		</ChildObjects>
-	</InformationRegister>
+	</AccumulationRegister>
 </MetaDataObject>

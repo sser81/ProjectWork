@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<PredefinedData xmlns="http://v8.1c.ru/8.3/xcf/predef" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="CatalogPredefinedItems" version="2.20">
+	<Item id="9d6df463-ff94-4c0e-8e6a-a8a6345f3bef">
+		<Name>MedicalInsurance</Name>
+		<Code>000000007</Code>
+		<Description>Medical insurance for family members</Description>
+		<IsFolder>false</IsFolder>
+	</Item>
+	<Item id="e0121488-7262-4d4e-8271-94296e098552">
+		<Name>NumberOfFamilyMembers</Name>
+		<Code>000000003</Code>
+		<Description>Number of family members</Description>
+		<IsFolder>false</IsFolder>
+	</Item>
+	<Item id="03bdee4f-050e-4650-816e-0704ca0b092c">
+		<Name>RelocationAllowance</Name>
+		<Code>000000004</Code>
+		<Description>Relocation allowance</Description>
+		<IsFolder>false</IsFolder>
+	</Item>
+	<Item id="15b5e2d4-7836-4eaa-9fab-875470fabcda">
+		<Name>SchoolingAllowance</Name>
+		<Code>000000001</Code>
+		<Description>Schooling allowance</Description>
+		<IsFolder>false</IsFolder>
+	</Item>
+	<Item id="c91e398e-7b99-4292-9ee0-6700fc767217">
+		<Name>TicketsHomeLeave</Name>
+		<Code>000000002</Code>
+		<Description>Tickets (Home leave)</Description>
+		<IsFolder>false</IsFolder>
+	</Item>
+	<Item id="f3a86946-fb37-4f4f-a1d2-bfc0dd94822c">
+		<Name>TicketsRepatriation</Name>
+		<Code>000000006</Code>
+		<Description>Tickets (Repatriation)</Description>
+		<IsFolder>false</IsFolder>
+	</Item>
+</PredefinedData>
