@@ -51,6 +51,524 @@ EndProcedure
 #EndRegion // Public
 
 ////////////////////////////////////////////////////////////////////////////////
+// DOCUMENT FLOW EXCHANGE FUNCTIONS
+
+Function GetChangedObjects(Node) Export 
+
+	SetPrivilegedMode(True);
+
+	arrXDTO_Objects = New Array;
+	arrRefs = New Array;
+	arrRecordSets = New Array;
+
+	Type_Object						= XDTOFactory.Type("http://www.sample-package.org", "Object");
+	Type_StageOfLimitsForEmployees	= XDTOFactory.Type("http://www.sample-package.org", "StageOfLimitsForEmployees");
+
+	Query = New Query;
+	Query.SetParameter("Node", Node);
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	// Catalog.StageOfLimitsForEmployees
+	Query.Text =
+	"SELECT
+	|	StageOfLimitsForEmployeesChanges.Node AS Node,
+	|	StageOfLimitsForEmployees.Ref AS Ref,
+	|	REFPRESENTATION(StageOfLimitsForEmployees.Ref) AS Presentation,
+	|	"""" AS PredefinedDataName,
+	|	EmploymentContractDocument.Ref AS EmployeeRef,
+	|	REFPRESENTATION(StageOfLimitsForEmployees.EmploymentContract.Employee) AS EmployeePresentation,
+	|	TypesOfLimitsForEmployees.CashFlowItem AS CashFlowItemRef,
+	|	REFPRESENTATION(TypesOfLimitsForEmployees.CashFlowItem) AS CashFlowItemPresentation,
+	|	TypesOfLimitsForEmployees.CashFlowItem.PredefinedDataName AS CashFlowItemPredefinedDataName,
+	|	StageOfLimitsForEmployees.DescriptionKey AS DescriptionKey,
+	|	StageOfLimitsForEmployees.StartDate AS StartDate,
+	|	StageOfLimitsForEmployees.EndDate AS EndDate
+	|FROM
+	|	Catalog.StageOfLimitsForEmployees.Changes AS StageOfLimitsForEmployeesChanges
+	|
+	|		LEFT JOIN Catalog.StageOfLimitsForEmployees AS StageOfLimitsForEmployees
+	|		ON StageOfLimitsForEmployeesChanges.Ref = StageOfLimitsForEmployees.Ref
+	|
+	|		LEFT JOIN Document.EmploymentContract AS EmploymentContractDocument
+	|		ON (StageOfLimitsForEmployees.EmploymentContract = EmploymentContractDocument.Ref)
+	|
+	|		LEFT JOIN Catalog.TypesOfLimitsForEmployees AS TypesOfLimitsForEmployees
+	|		ON (StageOfLimitsForEmployees.TypeOfLimit = TypesOfLimitsForEmployees.Ref)
+	|WHERE
+	|	StageOfLimitsForEmployeesChanges.Node = &Node
+	|	AND NOT EmploymentContractDocument.Ref IS NULL
+	|	AND NOT TypesOfLimitsForEmployees.CashFlowItem IS NULL
+	|	AND TypesOfLimitsForEmployees.CashFlowItem <> &CashFlowItem_EmptyRef";
+
+	Query.SetParameter("CashFlowItem_EmptyRef", Catalogs.CashFlowItems.EmptyRef());
+
+	Selection = Query.Execute().Select();
+	While Selection.Next() Do
+
+		XDTO_Object = XDTOFactory.Create(Type_StageOfLimitsForEmployees);
+
+		XDTO_Object.ID					= Selection.Ref.UUID();
+		XDTO_Object.Presentation		= Selection.Presentation;
+		XDTO_Object.PredefinedDataName	= Selection.PredefinedDataName;
+		XDTO_Object.TypeName			= Selection.Ref.Metadata().FullName();
+
+		XDTO_Employee = XDTOFactory.Create(Type_Object);
+		XDTO_Employee.ID			= Selection.EmployeeRef.UUID();
+		XDTO_Employee.Presentation	= Selection.EmployeePresentation;
+
+		XDTO_Object.Employee = XDTO_Employee;
+
+		XDTO_CashFlowItem = XDTOFactory.Create(Type_Object);
+		XDTO_CashFlowItem.ID					= Selection.CashFlowItemRef.UUID();
+		XDTO_CashFlowItem.Presentation			= Selection.CashFlowItemPresentation;
+		XDTO_CashFlowItem.PredefinedDataName	= Selection.CashFlowItemPredefinedDataName;
+
+		XDTO_Object.CashFlowItem = XDTO_CashFlowItem;
+
+		arrXDTO_Objects.Add(XDTO_Object);
+		arrRefs.Add(Selection.Ref);
+	EndDo;
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	// Catalog.CashFlowItems
+	Query.Text =
+	"SELECT
+	|	CashFlowItemsChanges.Node AS Node,
+	|	CashFlowItemsChanges.Ref AS Ref,
+	|	REFPRESENTATION(CashFlowItemsChanges.Ref) AS Presentation,
+	|	CashFlowItemsChanges.Ref.PredefinedDataName AS PredefinedDataName
+	|FROM
+	|	Catalog.CashFlowItems.Changes AS CashFlowItemsChanges
+	|WHERE
+	|	CashFlowItemsChanges.Node = &Node";
+
+	Selection = Query.Execute().Select();
+	While Selection.Next() Do
+		
+		XDTO_Object = XDTOFactory.Create(Type_Object);
+
+		XDTO_Object.ID					= Selection.Ref.UUID();
+		XDTO_Object.Presentation		= Selection.Presentation;
+		XDTO_Object.PredefinedDataName	= Selection.PredefinedDataName;
+		XDTO_Object.TypeName			= Selection.Ref.Metadata().FullName();
+
+		arrXDTO_Objects.Add(XDTO_Object);
+		arrRefs.Add(Selection.Ref);
+	EndDo;
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	// InformationRegister._DemoCompaniesEmployees
+	Query.Text =
+	"SELECT
+	|	_DemoCompaniesEmployeesChanges.Node AS Node,
+	|	EmploymentContract.Ref AS Ref,
+	|	REFPRESENTATION(EmploymentContract.Employee) AS Presentation
+	|FROM
+	|	InformationRegister._DemoCompaniesEmployees.Changes AS _DemoCompaniesEmployeesChanges
+	|		INNER JOIN Document.EmploymentContract AS EmploymentContract
+	|		ON _DemoCompaniesEmployeesChanges.Recorder = EmploymentContract.Ref
+	|WHERE
+	|	_DemoCompaniesEmployeesChanges.Node = &Node";
+
+	Selection = Query.Execute().Select();
+	While Selection.Next() Do
+
+		XDTO_Object = XDTOFactory.Create(Type_Object);
+
+		XDTO_Object.ID					= Selection.Ref.UUID();
+		XDTO_Object.Presentation		= Selection.Presentation;
+		XDTO_Object.TypeName			= Selection.Ref.Metadata().FullName();
+
+		arrXDTO_Objects.Add(XDTO_Object);
+
+		strDimensions = New Structure;
+		strDimensions.Insert("Recorder", Selection.Ref);
+		
+		strRecordSet = New Structure;
+		strRecordSet.Insert("Type", "InformationRegister");
+		strRecordSet.Insert("Name", "_DemoCompaniesEmployees");
+		strRecordSet.Insert("Dimensions", strDimensions);
+
+		arrRecordSets.Add(strRecordSet);
+	EndDo;
+
+	Return New Structure("Refs, RecordSets, XDTO_Objects", arrRefs, arrRecordSets, arrXDTO_Objects);
+
+EndFunction
+
+Function GetBalanceOfLimitsForEmployee(UUID_Employee, UUID_CashFlowItem, OnDate = Undefined) Export
+
+	SetPrivilegedMode(True);
+
+	Employee		= Catalogs._DemoIndividuals.EmptyRef();
+	Entity			= Catalogs._DemoCompanies.EmptyRef();
+	CashFlowItem	= Catalogs.CashFlowItems.EmptyRef(); 
+
+	If ValueIsFilled(UUID_Employee) Then
+		EmploymentContract = Documents.EmploymentContract.GetRef(New UUID(UUID_Employee)); 
+
+		If ValueIsFilled(EmploymentContract) Then
+			Employee = EmploymentContract.Employee;
+			Entity = EmploymentContract.Entity;
+		EndIf;
+	EndIf;
+
+	If ValueIsFilled(UUID_CashFlowItem) Then
+		CashFlowItem = Catalogs.CashFlowItems.GetRef(New UUID(UUID_CashFlowItem)); 
+	EndIf; 
+
+	Query = New Query;
+	Query.Text =
+	"SELECT
+	|	EmployeeLimitPlaningSliceLast.Entity AS Entity,
+	|	EmployeeLimitPlaningSliceLast.Employee AS Employee,
+	|	TypesOfLimitsForEmployees.CashFlowItem AS CashFlowItem,
+	|	TypesOfLimitsForEmployees.OneTime AS OneTime,
+	|	CASE
+	|		WHEN TypesOfLimitsForEmployees.CountLimitControl
+	|			THEN ""count""
+	|		ELSE ""amount""
+	|	END AS Resource,
+	|	EmployeeLimitPlaningSliceLast.Stage AS Stage,
+	|	EmployeeLimitPlaningSliceLast.Limit AS Limit,
+	|	0 AS Expense
+	|INTO TemporaryTableData
+	|FROM
+	|	InformationRegister.EmployeeLimitPlaning.SliceLast(
+	|			&DateSlice,
+	|			(Entity = &Entity
+	|				OR &Entity = &Entity_EmptyRef)
+	|				AND (Employee = &Employee
+	|					OR &Employee = &Employee_EmptyRef)) AS EmployeeLimitPlaningSliceLast
+	|		LEFT JOIN Catalog.TypesOfLimitsForEmployees AS TypesOfLimitsForEmployees
+	|		ON EmployeeLimitPlaningSliceLast.TypeOfLimit = TypesOfLimitsForEmployees.Ref
+	|WHERE
+	|	CASE
+	|			WHEN NOT TypesOfLimitsForEmployees.OneTime
+	|				THEN EmployeeLimitPlaningSliceLast.Stage <> &StageOfLimitsForEmployees_EmptyRef
+	|			ELSE TRUE
+	|		END
+	|	AND (TypesOfLimitsForEmployees.CashFlowItem = &CashFlowItem
+	|			OR &CashFlowItem = &CashFlowItem_EmptyRef)
+	|	AND NOT TypesOfLimitsForEmployees.Ref IS NULL
+	|
+	|UNION ALL
+	|
+	|SELECT
+	|	TurnoverByEmployeeLimitsTurnovers.Entity,
+	|	TurnoverByEmployeeLimitsTurnovers.Employee,
+	|	TypesOfLimitsForEmployees.CashFlowItem,
+	|	TypesOfLimitsForEmployees.OneTime,
+	|	CASE
+	|		WHEN TypesOfLimitsForEmployees.CountLimitControl
+	|			THEN ""count""
+	|		ELSE ""amount""
+	|	END,
+	|	TurnoverByEmployeeLimitsTurnovers.Stage,
+	|	0,
+	|	TurnoverByEmployeeLimitsTurnovers.LimitTurnover
+	|FROM
+	|	AccumulationRegister.TurnoverByEmployeeLimits.Turnovers(
+	|			,
+	|			&DateSlice,
+	|			,
+	|			(Entity = &Entity
+	|				OR &Entity = &Entity_EmptyRef)
+	|				AND (Employee = &Employee
+	|					OR &Employee = &Employee_EmptyRef)) AS TurnoverByEmployeeLimitsTurnovers
+	|		LEFT JOIN Catalog.TypesOfLimitsForEmployees AS TypesOfLimitsForEmployees
+	|		ON TurnoverByEmployeeLimitsTurnovers.TypeOfLimit = TypesOfLimitsForEmployees.Ref
+	|WHERE
+	|	CASE
+	|			WHEN NOT TypesOfLimitsForEmployees.OneTime
+	|				THEN TurnoverByEmployeeLimitsTurnovers.Stage <> &StageOfLimitsForEmployees_EmptyRef
+	|			ELSE TRUE
+	|		END
+	|	AND (TypesOfLimitsForEmployees.CashFlowItem = &CashFlowItem
+	|			OR &CashFlowItem = &CashFlowItem_EmptyRef)
+	|	AND NOT TypesOfLimitsForEmployees.Ref IS NULL
+	|;
+	|
+	|////////////////////////////////////////////////////////////////////////////////
+	|SELECT
+	|	TemporaryTableData.Entity AS Entity,
+	|	TemporaryTableData.Employee AS Employee,
+	|	CAST(EmployeesSliceFirst.EmploymentContract AS Document.EmploymentContract).Period AS ContractStartDate,
+	|	TemporaryTableData.CashFlowItem AS CashFlowItem,
+	|	TemporaryTableData.OneTime AS OneTime,
+	|	TemporaryTableData.Resource AS Resource,
+	|	TemporaryTableData.Stage AS Stage,
+	|	SUM(TemporaryTableData.Limit) AS Limit,
+	|	SUM(TemporaryTableData.Expense) AS Expense
+	|FROM
+	|	TemporaryTableData AS TemporaryTableData
+	|		LEFT JOIN InformationRegister._DemoCompaniesEmployees.SliceFirst(, ) AS EmployeesSliceFirst
+	|		ON TemporaryTableData.Entity = EmployeesSliceFirst.Organization
+	|			AND TemporaryTableData.Employee = EmployeesSliceFirst.Individual
+	|		LEFT JOIN Catalog.StageOfLimitsForEmployees AS StageOfLimitsForEmployees
+	|		ON TemporaryTableData.Stage = StageOfLimitsForEmployees.Ref
+	|
+	|GROUP BY
+	|	TemporaryTableData.Entity,
+	|	TemporaryTableData.Employee,
+	|	TemporaryTableData.CashFlowItem,
+	|	TemporaryTableData.OneTime,
+	|	TemporaryTableData.Resource,
+	|	TemporaryTableData.Stage,
+	|	CAST(EmployeesSliceFirst.EmploymentContract AS Document.EmploymentContract).Period,
+	|	StageOfLimitsForEmployees.StartDate,
+	|	StageOfLimitsForEmployees.EndDate
+	|
+	|ORDER BY
+	|	StageOfLimitsForEmployees.StartDate,
+	|	StageOfLimitsForEmployees.EndDate
+	|TOTALS
+	|	SUM(Limit),
+	|	SUM(Expense)
+	|BY
+	|	Entity,
+	|	Employee,
+	|	ContractStartDate,
+	|	CashFlowItem,
+	|	OneTime,
+	|	Resource";
+
+	If ValueIsFilled(OnDate) Then
+		Query.SetParameter("DateSlice", OnDate);
+	Else
+		Query.SetParameter("DateSlice", CurrentDate());
+	EndIf;
+
+	Query.SetParameter("Employee", Employee);
+	Query.SetParameter("Entity", Entity);
+	Query.SetParameter("CashFlowItem", CashFlowItem);
+
+	Query.SetParameter("Employee_EmptyRef", Catalogs._DemoIndividuals.EmptyRef());
+	Query.SetParameter("Entity_EmptyRef", Catalogs._DemoCompanies.EmptyRef());
+	Query.SetParameter("CashFlowItem_EmptyRef", Catalogs.CashFlowItems.EmptyRef());
+	Query.SetParameter("StageOfLimitsForEmployees_EmptyRef", Catalogs.StageOfLimitsForEmployees.EmptyRef());
+
+	Object = XDTOFactory.Type("http://www.sample-package.org", "Object");
+
+	XDTO_List = XDTOFactory.Create(XDTOFactory.Type("http://www.sample-package.org", "LimitsForEmployeesList")); 
+
+	SelectionEntity = Query.Execute().Select(QueryResultIteration.ByGroups, "Entity");
+	While SelectionEntity.Next() Do
+
+		SelectionEmployee = SelectionEntity.Select(QueryResultIteration.ByGroups, "Employee");
+		While SelectionEmployee.Next() Do
+
+			SelectionContractStartDate = SelectionEmployee.Select(QueryResultIteration.ByGroups, "ContractStartDate");
+			While SelectionContractStartDate.Next() Do
+
+				SelectionCashFlowItem = SelectionContractStartDate.Select(QueryResultIteration.ByGroups, "CashFlowItem");
+				While SelectionCashFlowItem.Next() Do
+
+					SelectionOneTime = SelectionCashFlowItem.Select(QueryResultIteration.ByGroups, "OneTime");
+					While SelectionOneTime.Next() Do
+
+						SelectionResource = SelectionOneTime.Select(QueryResultIteration.ByGroups, "Resource");
+						While SelectionResource.Next() Do
+
+							XDTO_Row = XDTOFactory.Create(XDTOFactory.Type("http://www.sample-package.org", "LimitsForEmployeesRow"));
+
+							XDTO_Employee = XDTOFactory.Create(Object);
+							XDTO_Employee.ID = SelectionEmployee.Employee.UUID();
+							XDTO_Employee.Presentation = String(SelectionEmployee.Employee);
+
+							XDTO_CashFlowItem = XDTOFactory.Create(Object);
+							XDTO_CashFlowItem.ID = SelectionCashFlowItem.CashFlowItem.UUID();
+							XDTO_CashFlowItem.Presentation = String(SelectionCashFlowItem.CashFlowItem);
+
+							XDTO_Row.Employee 			= XDTO_Employee;
+							XDTO_Row.CashFlowItem 		= XDTO_CashFlowItem;
+							XDTO_Row.ContractStartDate 	= SelectionContractStartDate.ContractStartDate;
+
+							XDTO_BalanceList = XDTOFactory.Create(XDTOFactory.Type("http://www.sample-package.org", "BalanceOfLimitsForEmployeesList")); 
+
+							If SelectionOneTime.OneTime Then
+								FillPropertyValues(XDTO_Row, SelectionResource, "Limit, Expense");
+							Else
+								Selection = SelectionResource.Select();
+								While Selection.Next() Do
+
+									XDTO_BalanceRow = XDTOFactory.Create(XDTOFactory.Type("http://www.sample-package.org", "BalanceOfLimitsForEmployeesRow"));
+									FillPropertyValues(XDTO_BalanceRow, Selection, "Limit, Expense");
+
+									XDTO_Stage = XDTOFactory.Create(Object);
+									XDTO_Stage.ID = Selection.Stage.UUID();
+									XDTO_Stage.Presentation = String(Selection.Stage);
+
+									XDTO_BalanceRow.Stage = XDTO_Stage;
+
+									XDTO_BalanceList.Row.Add(XDTO_BalanceRow);
+								EndDo;
+
+								XDTO_Row.Limit = 0;
+								XDTO_Row.Expense = 0;
+							EndIf;
+
+							XDTO_Row.OneTime	= SelectionOneTime.OneTime;
+							XDTO_Row.Resource	= SelectionResource.Resource;
+							XDTO_Row.Balances	= XDTO_BalanceList;
+
+							XDTO_List.Row.Add(XDTO_Row);
+						EndDo;
+					EndDo;
+				EndDo;
+			EndDo;
+		EndDo;
+	EndDo;
+
+	Return XDTO_List;
+
+EndFunction
+
+Procedure LoadChangeObjects(ObjectsXDTO) Export
+
+	For Each ObjectXDTO In ObjectsXDTO Do
+
+		TableName = "";
+		IsChange = False;
+		
+		ObjectRef = GetRefForObjectXDTO(ObjectXDTO, TableName);
+
+		If Not ValueIsFilled(TableName) Then
+ 			Continue;
+		EndIf;
+
+		If ValueIsFilled(ObjectRef) Then
+			NewObject = ObjectRef.GetObject();
+		Else
+			ObjectManager = Common.ObjectManagerByFullName(TableName);
+
+			NewObject = ObjectManager.CreateItem();
+			NewObject.SetNewObjectRef(ObjectManager.GetRef(New UUID(ObjectXDTO.ID)));
+
+			IsChange = True;
+		EndIf;
+
+		If NewObject.Description <> ObjectXDTO.Presentation Then
+			NewObject.Description = ObjectXDTO.Presentation;
+			IsChange = True;
+		EndIf;
+
+		If TableName = "Catalog.ДО_ЭтапыЛимитовСотрудников" Then
+
+			СтатьяДвиженияДенежныхСредств = GetRefForObjectXDTO(ObjectXDTO.CashFlowItem, "Catalog.ДО_СтатьиДвиженияДенежныхСредств", True);
+			If NewObject.СтатьяДвиженияДенежныхСредств <> СтатьяДвиженияДенежныхСредств
+				And (ValueIsFilled(NewObject.СтатьяДвиженияДенежныхСредств) Or ValueIsFilled(СтатьяДвиженияДенежныхСредств)) Then
+
+				NewObject.СтатьяДвиженияДенежныхСредств = СтатьяДвиженияДенежныхСредств;
+				IsChange = True;
+			EndIf;
+
+			Владелец = GetRefForObjectXDTO(ObjectXDTO.Employee, "Catalog.ДО_Сотрудники", True);
+			If NewObject.Владелец <> Владелец
+				And (ValueIsFilled(NewObject.Владелец) Or ValueIsFilled(Владелец)) Then
+
+				NewObject.Владелец = Владелец;
+				IsChange = True;
+			EndIf;
+		EndIf;
+
+		If IsChange Then
+			NewObject.DataExchange.Load = True;
+			NewObject.Write();
+		EndIf;
+	EndDo;
+
+EndProcedure
+
+Function GetRefForObjectXDTO(ObjectXDTO, TypeName = "", GetRefForUUID = False)
+
+	ThereIsPropertyType 				= False;
+	ThereIsPropertyPredefinedDataName 	= False;
+
+	PropertiesXDTO = ObjectXDTO.Properties();
+	For Each PropertyXDTO In PropertiesXDTO Do
+
+		If Upper(PropertyXDTO.Name) = Upper("TypeName") Then
+			ThereIsPropertyType = True;
+		EndIf;
+
+		If Upper(PropertyXDTO.Name) = Upper("PredefinedDataName") Then
+			ThereIsPropertyPredefinedDataName = True;
+		EndIf;
+	EndDo;
+	
+	If Not ValueIsFilled(TypeName) Then
+
+		If ThereIsPropertyType Then
+
+			TypeNameExt = ObjectXDTO.TypeName;
+
+			If StrFind(Upper(TypeNameExt), Upper("StageOfLimitsForEmployees")) > 0 Then
+				TypeName = "Catalog.ДО_ЭтапыЛимитовСотрудников";
+
+			ElsIf StrFind(Upper(TypeNameExt), Upper("CashFlowItems")) > 0 Then
+				TypeName = "Catalog.ДО_СтатьиДвиженияДенежныхСредств";
+
+			ElsIf StrFind(Upper(TypeNameExt), Upper("_DemoIndividuals")) > 0
+				Or StrFind(Upper(TypeNameExt), Upper("EmploymentContract")) > 0 Then
+				TypeName = "Catalog.ДО_Сотрудники";
+			EndIf;
+		EndIf;
+	EndIf;
+
+	If Not ValueIsFilled(TypeName) Then
+		Return Undefined;
+	EndIf;
+
+	If ThereIsPropertyPredefinedDataName Then
+		PredefinedDataName = ObjectXDTO.PredefinedDataName;
+	Else
+		PredefinedDataName = "";
+	EndIf;
+
+	Query = New Query;
+	Query.Text =
+	"SELECT
+	|	Table.Ref AS Ref,
+	|	1 AS Priority
+	|FROM
+	|	&Table AS Table
+	|WHERE
+	|	Table.Predefined
+	|	AND Table.PredefinedDataName = &PredefinedDataName
+	|
+	|UNION
+	|
+	|SELECT
+	|	Table.Ref,
+	|	2
+	|FROM
+	|	&Table AS Table
+	|WHERE
+	|	NOT Table.Predefined
+	|	AND UUID(Table.Ref) = &UUID_Ref";
+
+	Query.Text = StrReplace(Query.Text, "&Table", TypeName);
+
+	Query.SetParameter("UUID_Ref", New UUID(ObjectXDTO.ID));
+	Query.SetParameter("PredefinedDataName", PredefinedDataName);
+
+	Selection = Query.Execute().Select();
+	If Selection.Next() Then
+
+		Return Selection.Ref;
+
+	ElsIf GetRefForUUID Then
+
+		ObjectManager = Common.ObjectManagerByFullName(TypeName);
+		Return ObjectManager.GetRef(New UUID(ObjectXDTO.ID));
+	Else
+		Return Undefined
+	EndIf;				
+
+EndFunction
+
+////////////////////////////////////////////////////////////////////////////////
 
 Procedure InitializationAttributesForm(Form)
 

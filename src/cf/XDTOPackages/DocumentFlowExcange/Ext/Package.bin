@@ -1,0 +1,48 @@
+﻿<package xmlns="http://v8.1c.ru/8.1/xdto" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" targetNamespace="http://www.sample-package.org">
+	<import namespace="http://v8.1c.ru/8.1/data/core"/>
+	<objectType name="BalanceOfLimitsForEmployeesList">
+		<property xmlns:d3p1="http://www.sample-package.org" name="Row" type="d3p1:BalanceOfLimitsForEmployeesRow" lowerBound="0" upperBound="-1"/>
+	</objectType>
+	<objectType name="BalanceOfLimitsForEmployeesRow">
+		<property xmlns:d3p1="http://www.sample-package.org" name="Stage" type="d3p1:Object" nillable="true"/>
+		<property name="Limit" type="xs:decimal" nillable="true"/>
+		<property name="Expense" type="xs:decimal" nillable="true"/>
+	</objectType>
+	<objectType name="LimitsForCashFlowList">
+		<property xmlns:d3p1="http://www.sample-package.org" name="Row" type="d3p1:LimitsForCashFlowRow" lowerBound="0" upperBound="-1"/>
+	</objectType>
+	<objectType name="LimitsForCashFlowRow">
+		<property xmlns:d3p1="http://www.sample-package.org" name="Entity" type="d3p1:Object"/>
+		<property xmlns:d3p1="http://www.sample-package.org" name="Department" type="d3p1:Object"/>
+		<property xmlns:d3p1="http://www.sample-package.org" name="CashFlowItem" type="d3p1:Object"/>
+		<property xmlns:d3p1="http://www.sample-package.org" name="Currency" type="d3p1:Object"/>
+		<property name="Limit" type="xs:decimal" nillable="true"/>
+		<property name="Expense" type="xs:decimal" nillable="true"/>
+	</objectType>
+	<objectType name="LimitsForEmployeesList">
+		<property xmlns:d3p1="http://www.sample-package.org" name="Row" type="d3p1:LimitsForEmployeesRow" lowerBound="0" upperBound="-1"/>
+	</objectType>
+	<objectType name="LimitsForEmployeesRow">
+		<property xmlns:d3p1="http://www.sample-package.org" name="Employee" type="d3p1:Object"/>
+		<property xmlns:d3p1="http://www.sample-package.org" name="CashFlowItem" type="d3p1:Object"/>
+		<property name="ContractStartDate" type="xs:date" nillable="true"/>
+		<property name="Limit" type="xs:decimal" nillable="true"/>
+		<property name="Expense" type="xs:decimal" nillable="true"/>
+		<property xmlns:d3p1="http://www.sample-package.org" name="Balances" type="d3p1:BalanceOfLimitsForEmployeesList" nillable="true"/>
+		<property name="OneTime" type="xs:boolean"/>
+		<property name="Resource" type="xs:string" nillable="true" default="amount"/>
+	</objectType>
+	<objectType name="Object">
+		<property xmlns:d3p1="http://v8.1c.ru/8.1/data/core" name="ID" type="d3p1:UUID"/>
+		<property name="Presentation" type="xs:string" form="Attribute"/>
+		<property name="TypeName" type="xs:string" form="Attribute"/>
+		<property name="PredefinedDataName" type="xs:string" nillable="true" form="Attribute"/>
+	</objectType>
+	<objectType xmlns:d2p1="http://www.sample-package.org" name="StageOfLimitsForEmployees" base="d2p1:Object">
+		<property name="Employee" type="d2p1:Object"/>
+		<property name="CashFlowItem" type="d2p1:Object"/>
+		<property name="DescriptionKey" type="xs:string" form="Attribute"/>
+		<property name="StartDate" type="xs:dateTime" form="Element"/>
+		<property name="EndDate" type="xs:dateTime" form="Element"/>
+	</objectType>
+</package>
