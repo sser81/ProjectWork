@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<ExchangePlan uuid="2297162d-735a-49be-b26c-ad5475b7b2dd">
+		<InternalInfo>
+			<xr:ThisNode>a6f37afd-79f7-4553-b92a-c6c14373ee86</xr:ThisNode>
+			<xr:GeneratedType name="ExchangePlanObject.ExchangeDocflow" category="Object">
+				<xr:TypeId>104a8919-37cc-4f3c-a8e0-e3e6907ce21f</xr:TypeId>
+				<xr:ValueId>9520fb64-3be4-4f4a-aeaa-b8d2cf1e36a2</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ExchangePlanRef.ExchangeDocflow" category="Ref">
+				<xr:TypeId>39136be3-0ae1-4bf2-8392-a9005403565a</xr:TypeId>
+				<xr:ValueId>0d60e1ca-bbf8-4ea7-afec-da25ce0dd5ec</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ExchangePlanSelection.ExchangeDocflow" category="Selection">
+				<xr:TypeId>48696f14-87d3-47f5-9977-abf58e4ae980</xr:TypeId>
+				<xr:ValueId>4b56340c-3adf-4a1f-90a4-188bdcbb9356</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ExchangePlanList.ExchangeDocflow" category="List">
+				<xr:TypeId>5a1797c0-9dba-4a05-8dd5-e05bbe36c161</xr:TypeId>
+				<xr:ValueId>597b447f-f1bc-4cd2-ae32-7759b59431e2</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="ExchangePlanManager.ExchangeDocflow" category="Manager">
+				<xr:TypeId>8ecf9841-8216-4595-8d90-0ad1898127dc</xr:TypeId>
+				<xr:ValueId>7a47ef2a-a5bb-423c-ba90-5484bf67c2fe</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
+		<Properties>
+			<Name>ExchangeDocflow</Name>
+			<Synonym>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Exchange docflow</v8:content>
+				</v8:item>
+			</Synonym>
+			<Comment/>
+			<UseStandardCommands>true</UseStandardCommands>
+			<CodeLength>9</CodeLength>
+			<CodeAllowedLength>Variable</CodeAllowedLength>
+			<DescriptionLength>25</DescriptionLength>
+			<DefaultPresentation>AsDescription</DefaultPresentation>
+			<EditType>InDialog</EditType>
+			<QuickChoice>false</QuickChoice>
+			<ChoiceMode>BothWays</ChoiceMode>
+			<InputByString>
+				<xr:Field>ExchangePlan.ExchangeDocflow.StandardAttribute.Description</xr:Field>
+				<xr:Field>ExchangePlan.ExchangeDocflow.StandardAttribute.Code</xr:Field>
+			</InputByString>
+			<SearchStringModeOnInputByString>Begin</SearchStringModeOnInputByString>
+			<FullTextSearchOnInputByString>DontUse</FullTextSearchOnInputByString>
+			<ChoiceDataGetModeOnInputByString>Directly</ChoiceDataGetModeOnInputByString>
+			<DefaultObjectForm/>
+			<DefaultListForm/>
+			<DefaultChoiceForm/>
+			<AuxiliaryObjectForm/>
+			<AuxiliaryListForm/>
+			<AuxiliaryChoiceForm/>
+			<Characteristics/>
+			<BasedOn/>
+			<DistributedInfoBase>false</DistributedInfoBase>
+			<IncludeConfigurationExtensions>false</IncludeConfigurationExtensions>
+			<CreateOnInput>DontUse</CreateOnInput>
+			<ChoiceHistoryOnInput>Auto</ChoiceHistoryOnInput>
+			<IncludeHelpInContents>false</IncludeHelpInContents>
+			<DataLockFields/>
+			<DataLockControlMode>Managed</DataLockControlMode>
+			<FullTextSearch>Use</FullTextSearch>
+			<ObjectPresentation/>
+			<ExtendedObjectPresentation/>
+			<ListPresentation/>
+			<ExtendedListPresentation/>
+			<Explanation/>
+			<DataHistory>DontUse</DataHistory>
+			<UpdateDataHistoryImmediatelyAfterWrite>false</UpdateDataHistoryImmediatelyAfterWrite>
+			<ExecuteAfterWriteDataHistoryVersionProcessing>false</ExecuteAfterWriteDataHistoryVersionProcessing>
+		</Properties>
+		<ChildObjects/>
+	</ExchangePlan>
+</MetaDataObject>

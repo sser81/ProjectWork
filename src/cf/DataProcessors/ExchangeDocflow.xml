@@ -1,37 +1,35 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <MetaDataObject xmlns="http://v8.1c.ru/8.3/MDClasses" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:cmi="http://v8.1c.ru/8.2/managed-application/cmi" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xen="http://v8.1c.ru/8.3/xcf/enums" xmlns:xpr="http://v8.1c.ru/8.3/xcf/predef" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
-	<Subsystem uuid="522029b1-aff8-4f98-bbb1-d638dbd650a7">
+	<DataProcessor uuid="a5cb59ce-b590-4e4c-b09f-f9336e9253f8">
+		<InternalInfo>
+			<xr:GeneratedType name="DataProcessorObject.ExchangeDocflow" category="Object">
+				<xr:TypeId>4688cfc7-041c-4f95-8683-73a7c0b161ad</xr:TypeId>
+				<xr:ValueId>4840d56c-7acf-4d4b-a2e7-0ecd2e304f04</xr:ValueId>
+			</xr:GeneratedType>
+			<xr:GeneratedType name="DataProcessorManager.ExchangeDocflow" category="Manager">
+				<xr:TypeId>1220cd0a-10d2-4dcd-8005-673e8641ac75</xr:TypeId>
+				<xr:ValueId>8a5628bc-af5c-40b3-ae56-8c40f1c9fd98</xr:ValueId>
+			</xr:GeneratedType>
+		</InternalInfo>
 		<Properties>
-			<Name>LimitsForEmployees</Name>
+			<Name>ExchangeDocflow</Name>
 			<Synonym>
 				<v8:item>
-					<v8:lang>ru</v8:lang>
-					<v8:content>Лимиты на расходы сотрудников</v8:content>
-				</v8:item>
-				<v8:item>
 					<v8:lang>en</v8:lang>
-					<v8:content>Limits for employees</v8:content>
+					<v8:content>Exchange docflow</v8:content>
 				</v8:item>
 			</Synonym>
 			<Comment/>
-			<IncludeHelpInContents>true</IncludeHelpInContents>
-			<IncludeInCommandInterface>true</IncludeInCommandInterface>
-			<UseOneCommand>false</UseOneCommand>
+			<UseStandardCommands>true</UseStandardCommands>
+			<DefaultForm>DataProcessor.ExchangeDocflow.Form.Form</DefaultForm>
+			<AuxiliaryForm/>
+			<IncludeHelpInContents>false</IncludeHelpInContents>
+			<ExtendedPresentation/>
 			<Explanation/>
-			<Picture>
-				<xr:Ref>0</xr:Ref>
-				<xr:LoadTransparent>true</xr:LoadTransparent>
-			</Picture>
-			<Content>
-				<xr:Item xsi:type="xr:MDObjectRef">ExchangePlan.ExchangeDocflow</xr:Item>
-				<xr:Item xsi:type="xr:MDObjectRef">DataProcessor.ExchangeDocflow</xr:Item>
-			</Content>
 		</Properties>
 		<ChildObjects>
-			<Subsystem>BudgetDocuments</Subsystem>
-			<Subsystem>Reports</Subsystem>
-			<Subsystem>MasterData</Subsystem>
-			<Subsystem>Документооборот</Subsystem>
+			<Form>Form</Form>
+			<Template>ExternalComponent</Template>
 		</ChildObjects>
-	</Subsystem>
+	</DataProcessor>
 </MetaDataObject>

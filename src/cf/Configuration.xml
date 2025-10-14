@@ -1942,6 +1942,7 @@
 			<ExchangePlan>ApplicationsMigration</ExchangePlan>
 			<ExchangePlan>InfobaseUpdate</ExchangePlan>
 			<ExchangePlan>MessagesExchange</ExchangePlan>
+			<ExchangePlan>ExchangeDocflow</ExchangePlan>
 			<XDTOPackage>_DemoEnterpriseDataExt_1_1_1</XDTOPackage>
 			<XDTOPackage>_DemoEnterpriseDataExt_1_2_1</XDTOPackage>
 			<XDTOPackage>AgentScripts</XDTOPackage>
@@ -1997,17 +1998,18 @@
 			<XDTOPackage>Messages</XDTOPackage>
 			<XDTOPackage>Patch</XDTOPackage>
 			<XDTOPackage>ServiceCommon</XDTOPackage>
-			<WebService>EnterpriseDataExchange_1_0_1_1</WebService>
-			<WebService>EnterpriseDataUpload_1_0_1_1</WebService>
+			<XDTOPackage>DocumentFlowExcange</XDTOPackage>
 			<WebService>Exchange</WebService>
+			<WebService>EnterpriseDataExchange_1_0_1_1</WebService>
 			<WebService>Exchange_2_0_1_6</WebService>
+			<WebService>InterfaceVersion</WebService>
 			<WebService>Exchange_3_0_1_1</WebService>
 			<WebService>Exchange_3_0_2_1</WebService>
 			<WebService>Exchange_3_0_2_2</WebService>
-			<WebService>InterfaceVersion</WebService>
 			<WebService>RemoteAdministrationOfExchange</WebService>
 			<WebService>RemoteAdministrationOfExchange_2_0_1_6</WebService>
 			<WebService>RemoteAdministrationOfExchange_2_1_6_1</WebService>
+			<WebService>EnterpriseDataUpload_1_0_1_1</WebService>
 			<WebService>RemoteAdministrationOfExchange_2_4_5_1</WebService>
 			<WebService>RemoteControl</WebService>
 			<HTTPService>Billing</HTTPService>
@@ -2952,6 +2954,11 @@
 			<Catalog>CashFlowItems</Catalog>
 			<Catalog>StageOfLimitsForEmployees</Catalog>
 			<Catalog>TypesOfLimitsForEmployees</Catalog>
+			<Catalog>ДО_Организации</Catalog>
+			<Catalog>ДО_Сотрудники</Catalog>
+			<Catalog>ДО_СтатьиДвиженияДенежныхСредств</Catalog>
+			<Catalog>ДО_Документы</Catalog>
+			<Catalog>ДО_ЭтапыЛимитовСотрудников</Catalog>
 			<Document>_DemoCashVoucher</Document>
 			<Document>_DemoCustomerProformaInvoice</Document>
 			<Document>_DemoDebitingFromAccount</Document>
@@ -3274,6 +3281,7 @@
 			<DataProcessor>UpdateToCorrectiveVersionSSL</DataProcessor>
 			<DataProcessor>UsersSettings</DataProcessor>
 			<DataProcessor>WizardOfTransitionToCloud</DataProcessor>
+			<DataProcessor>ExchangeDocflow</DataProcessor>
 			<InformationRegister>_DemoCommonInfoRecords</InformationRegister>
 			<InformationRegister>_DemoCompaniesEmployees</InformationRegister>
 			<InformationRegister>_DemoDocumentsRegistry</InformationRegister>

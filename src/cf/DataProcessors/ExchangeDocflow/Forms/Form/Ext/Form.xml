@@ -1,0 +1,528 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form xmlns="http://v8.1c.ru/8.3/xcf/logform" xmlns:app="http://v8.1c.ru/8.2/managed-application/core" xmlns:cfg="http://v8.1c.ru/8.1/data/enterprise/current-config" xmlns:dcscor="http://v8.1c.ru/8.1/data-composition-system/core" xmlns:dcssch="http://v8.1c.ru/8.1/data-composition-system/schema" xmlns:dcsset="http://v8.1c.ru/8.1/data-composition-system/settings" xmlns:ent="http://v8.1c.ru/8.1/data/enterprise" xmlns:lf="http://v8.1c.ru/8.2/managed-application/logform" xmlns:style="http://v8.1c.ru/8.1/data/ui/style" xmlns:sys="http://v8.1c.ru/8.1/data/ui/fonts/system" xmlns:v8="http://v8.1c.ru/8.1/data/core" xmlns:v8ui="http://v8.1c.ru/8.1/data/ui" xmlns:web="http://v8.1c.ru/8.1/data/ui/colors/web" xmlns:win="http://v8.1c.ru/8.1/data/ui/colors/windows" xmlns:xr="http://v8.1c.ru/8.3/xcf/readable" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.20">
+	<AutoSaveDataInSettings>Use</AutoSaveDataInSettings>
+	<CommandBarLocation>None</CommandBarLocation>
+	<AutoCommandBar name="FormCommandBar" id="-1"/>
+	<Events>
+		<Event name="OnOpen">OnOpen</Event>
+	</Events>
+	<ChildItems>
+		<Pages name="GroupPages" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Group pages</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Group pages</v8:content>
+				</v8:item>
+			</ToolTip>
+			<ExtendedTooltip name="GroupPagesExtendedTooltip" id="2"/>
+			<ChildItems>
+				<Page name="GroupAccSystem" id="44">
+					<Title>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Accounting system</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Group acc system</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ExtendedTooltip name="GroupAccSystemExtendedTooltip" id="45"/>
+					<ChildItems>
+						<CommandBar name="GroupAccSystemCommandPanel" id="22">
+							<Title>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>Group acc system command panel</v8:content>
+								</v8:item>
+							</Title>
+							<ToolTip>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>Group acc system command panel</v8:content>
+								</v8:item>
+							</ToolTip>
+							<ExtendedTooltip name="GroupAccSystemCommandPanelExtendedTooltip" id="23"/>
+							<ChildItems>
+								<ButtonGroup name="GroupCommandPanelExchangeDocflow" id="28">
+									<Title>
+										<v8:item>
+											<v8:lang>en</v8:lang>
+											<v8:content>Group command panel exchange docflow</v8:content>
+										</v8:item>
+									</Title>
+									<ToolTip>
+										<v8:item>
+											<v8:lang>en</v8:lang>
+											<v8:content>Group command panel exchange docflow</v8:content>
+										</v8:item>
+									</ToolTip>
+									<ExtendedTooltip name="GroupCommandPanelExchangeDocflowExtendedTooltip" id="29"/>
+									<ChildItems>
+										<Button name="SendToDocflow" id="18">
+											<Type>CommandBarButton</Type>
+											<CommandName>Form.Command.SendToDocflow</CommandName>
+											<ExtendedTooltip name="SendToDocflowExtendedTooltip" id="19"/>
+										</Button>
+										<Button name="GetFromDocflow" id="20">
+											<Type>CommandBarButton</Type>
+											<CommandName>Form.Command.GetFromDocflow</CommandName>
+											<ExtendedTooltip name="GetFromDocflowExtendedTooltip" id="21"/>
+										</Button>
+									</ChildItems>
+								</ButtonGroup>
+							</ChildItems>
+						</CommandBar>
+						<TextDocumentField name="AccountingSystemSendText" id="50">
+							<DataPath>AccountingSystemSendText</DataPath>
+							<ContextMenu name="AccountingSystemSendTextContextMenu" id="51"/>
+							<ExtendedTooltip name="AccountingSystemSendTextExtendedTooltip" id="52"/>
+						</TextDocumentField>
+						<TextDocumentField name="AccountingSystemGetText" id="53">
+							<DataPath>AccountingSystemGetText</DataPath>
+							<ContextMenu name="AccountingSystemGetTextContextMenu" id="54"/>
+							<ExtendedTooltip name="AccountingSystemGetTextExtendedTooltip" id="55"/>
+						</TextDocumentField>
+					</ChildItems>
+				</Page>
+				<Page name="GroupDocflow" id="46">
+					<Title>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Docflow</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Group docflow</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ExtendedTooltip name="GroupDocflowExtendedTooltip" id="47"/>
+					<ChildItems>
+						<CommandBar name="GroupDocflowCommandPanel" id="48">
+							<Title>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>Group docflow command panel</v8:content>
+								</v8:item>
+							</Title>
+							<ToolTip>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>Group docflow command panel</v8:content>
+								</v8:item>
+							</ToolTip>
+							<ExtendedTooltip name="GroupDocflowCommandPanelExtendedTooltip" id="49"/>
+							<ChildItems>
+								<ButtonGroup name="GroupCommandPanelExchangeAccSystem" id="30">
+									<Title>
+										<v8:item>
+											<v8:lang>en</v8:lang>
+											<v8:content>Group command panel exchange acc system</v8:content>
+										</v8:item>
+									</Title>
+									<ToolTip>
+										<v8:item>
+											<v8:lang>en</v8:lang>
+											<v8:content>Group command panel exchange acc system</v8:content>
+										</v8:item>
+									</ToolTip>
+									<ExtendedTooltip name="GroupCommandPanelExchangeAccSystemExtendedTooltip" id="31"/>
+									<ChildItems>
+										<Button name="SendToAccSystem" id="24">
+											<Type>CommandBarButton</Type>
+											<CommandName>Form.Command.SendToAccSystem</CommandName>
+											<ExtendedTooltip name="SendToAccSystemExtendedTooltip" id="25"/>
+										</Button>
+										<Button name="GetFromAccSystem" id="26">
+											<Type>CommandBarButton</Type>
+											<CommandName>Form.Command.GetFromAccSystem</CommandName>
+											<ExtendedTooltip name="GetFromAccSystemExtendedTooltip" id="27"/>
+										</Button>
+									</ChildItems>
+								</ButtonGroup>
+							</ChildItems>
+						</CommandBar>
+						<TextDocumentField name="DocflowSendText" id="56">
+							<DataPath>DocflowSendText</DataPath>
+							<ContextMenu name="DocflowSendTextContextMenu" id="57"/>
+							<ExtendedTooltip name="DocflowSendTextExtendedTooltip" id="58"/>
+						</TextDocumentField>
+						<TextDocumentField name="DocflowGetText" id="59">
+							<DataPath>DocflowGetText</DataPath>
+							<ContextMenu name="DocflowGetTextContextMenu" id="60"/>
+							<ExtendedTooltip name="DocflowGetTextExtendedTooltip" id="61"/>
+						</TextDocumentField>
+					</ChildItems>
+				</Page>
+				<Page name="GroupSettings" id="5">
+					<Title>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Settings</v8:content>
+						</v8:item>
+					</Title>
+					<ToolTip>
+						<v8:item>
+							<v8:lang>en</v8:lang>
+							<v8:content>Group settings</v8:content>
+						</v8:item>
+					</ToolTip>
+					<ExtendedTooltip name="GroupSettingsExtendedTooltip" id="6"/>
+					<ChildItems>
+						<UsualGroup name="GroupRabbitMQAuthentification" id="16">
+							<Title>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>Authentification</v8:content>
+								</v8:item>
+							</Title>
+							<ToolTip>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>Group rabbit MQAuthentification</v8:content>
+								</v8:item>
+							</ToolTip>
+							<Group>Vertical</Group>
+							<Representation>NormalSeparation</Representation>
+							<ExtendedTooltip name="GroupRabbitMQAuthentificationExtendedTooltip" id="17"/>
+							<ChildItems>
+								<UsualGroup name="GroupRabbitMQURL" id="32">
+									<Title>
+										<v8:item>
+											<v8:lang>en</v8:lang>
+											<v8:content>Group rabbit MQURL</v8:content>
+										</v8:item>
+									</Title>
+									<ToolTip>
+										<v8:item>
+											<v8:lang>en</v8:lang>
+											<v8:content>Group rabbit MQURL</v8:content>
+										</v8:item>
+									</ToolTip>
+									<Group>AlwaysHorizontal</Group>
+									<Representation>None</Representation>
+									<ShowTitle>false</ShowTitle>
+									<ExtendedTooltip name="GroupRabbitMQURLExtendedTooltip" id="33"/>
+									<ChildItems>
+										<InputField name="RabbitMQURL" id="13">
+											<DataPath>RabbitMQURL</DataPath>
+											<AutoMaxWidth>false</AutoMaxWidth>
+											<MaxWidth>45</MaxWidth>
+											<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+											<ContextMenu name="RabbitMQURLContextMenu" id="14"/>
+											<ExtendedTooltip name="RabbitMQURLExtendedTooltip" id="15"/>
+										</InputField>
+										<InputField name="RabbitMQPort" id="34">
+											<DataPath>RabbitMQPort</DataPath>
+											<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+											<ContextMenu name="RabbitMQPortContextMenu" id="35"/>
+											<ExtendedTooltip name="RabbitMQPortExtendedTooltip" id="36"/>
+										</InputField>
+									</ChildItems>
+								</UsualGroup>
+								<UsualGroup name="GroupRabbitMQLogin" id="37">
+									<Title>
+										<v8:item>
+											<v8:lang>en</v8:lang>
+											<v8:content>Group rabbit MQLogin</v8:content>
+										</v8:item>
+									</Title>
+									<ToolTip>
+										<v8:item>
+											<v8:lang>en</v8:lang>
+											<v8:content>Group rabbit MQLogin</v8:content>
+										</v8:item>
+									</ToolTip>
+									<Representation>None</Representation>
+									<ShowTitle>false</ShowTitle>
+									<ExtendedTooltip name="GroupRabbitMQLoginExtendedTooltip" id="38"/>
+									<ChildItems>
+										<InputField name="RabbitMQLogin" id="7">
+											<DataPath>RabbitMQLogin</DataPath>
+											<AutoMaxWidth>false</AutoMaxWidth>
+											<MaxWidth>16</MaxWidth>
+											<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+											<ContextMenu name="RabbitMQLoginContextMenu" id="8"/>
+											<ExtendedTooltip name="RabbitMQLoginExtendedTooltip" id="9"/>
+										</InputField>
+										<InputField name="RabbitMQPassword" id="10">
+											<DataPath>RabbitMQPassword</DataPath>
+											<AutoMaxWidth>false</AutoMaxWidth>
+											<MaxWidth>16</MaxWidth>
+											<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+											<ContextMenu name="RabbitMQPasswordContextMenu" id="11"/>
+											<ExtendedTooltip name="RabbitMQPasswordExtendedTooltip" id="12"/>
+										</InputField>
+									</ChildItems>
+								</UsualGroup>
+							</ChildItems>
+						</UsualGroup>
+						<UsualGroup name="GroupRegistration" id="42">
+							<Title>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>Registration</v8:content>
+								</v8:item>
+							</Title>
+							<ToolTip>
+								<v8:item>
+									<v8:lang>en</v8:lang>
+									<v8:content>Group registration</v8:content>
+								</v8:item>
+							</ToolTip>
+							<Representation>NormalSeparation</Representation>
+							<ExtendedTooltip name="GroupRegistrationExtendedTooltip" id="43"/>
+							<ChildItems>
+								<InputField name="Node" id="39">
+									<DataPath>Node</DataPath>
+									<ExtendedEditMultipleValues>true</ExtendedEditMultipleValues>
+									<ChoiceParameters>
+										<app:item name="Filter.ThisNode">
+											<app:value xsi:type="FormChoiceListDesTimeValue">
+												<Presentation/>
+												<Value xsi:type="xs:boolean">false</Value>
+											</app:value>
+										</app:item>
+									</ChoiceParameters>
+									<ContextMenu name="NodeContextMenu" id="40"/>
+									<ExtendedTooltip name="NodeExtendedTooltip" id="41"/>
+								</InputField>
+							</ChildItems>
+						</UsualGroup>
+					</ChildItems>
+				</Page>
+			</ChildItems>
+		</Pages>
+	</ChildItems>
+	<Attributes>
+		<Attribute name="Object" id="1">
+			<Type>
+				<v8:Type>cfg:DataProcessorObject.ExchangeDocflow</v8:Type>
+			</Type>
+			<MainAttribute>true</MainAttribute>
+		</Attribute>
+		<Attribute name="RabbitMQURL" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>URL</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+			<Save>
+				<Field>RabbitMQURL</Field>
+			</Save>
+		</Attribute>
+		<Attribute name="RabbitMQLogin" id="3">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Login</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+			<Save>
+				<Field>RabbitMQLogin</Field>
+			</Save>
+		</Attribute>
+		<Attribute name="RabbitMQPassword" id="4">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Password</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:string</v8:Type>
+				<v8:StringQualifiers>
+					<v8:Length>0</v8:Length>
+					<v8:AllowedLength>Variable</v8:AllowedLength>
+				</v8:StringQualifiers>
+			</Type>
+			<Save>
+				<Field>RabbitMQPassword</Field>
+			</Save>
+		</Attribute>
+		<Attribute name="RabbitMQPort" id="5">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Port</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>xs:decimal</v8:Type>
+				<v8:NumberQualifiers>
+					<v8:Digits>10</v8:Digits>
+					<v8:FractionDigits>0</v8:FractionDigits>
+					<v8:AllowedSign>Nonnegative</v8:AllowedSign>
+				</v8:NumberQualifiers>
+			</Type>
+			<Save>
+				<Field>RabbitMQPort</Field>
+			</Save>
+		</Attribute>
+		<Attribute name="Node" id="6">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Exchange node</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type>cfg:ExchangePlanRef.ExchangeDocflow</v8:Type>
+			</Type>
+			<Save>
+				<Field>Node</Field>
+			</Save>
+		</Attribute>
+		<Attribute name="AccountingSystemSendText" id="7">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Send text</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type xmlns:d5p1="http://v8.1c.ru/8.1/data/txtedt">d5p1:TextDocument</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="AccountingSystemGetText" id="8">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Get text</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type xmlns:d5p1="http://v8.1c.ru/8.1/data/txtedt">d5p1:TextDocument</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="DocflowSendText" id="9">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Send text</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type xmlns:d5p1="http://v8.1c.ru/8.1/data/txtedt">d5p1:TextDocument</v8:Type>
+			</Type>
+		</Attribute>
+		<Attribute name="DocflowGetText" id="10">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Get text</v8:content>
+				</v8:item>
+			</Title>
+			<Type>
+				<v8:Type xmlns:d5p1="http://v8.1c.ru/8.1/data/txtedt">d5p1:TextDocument</v8:Type>
+			</Type>
+		</Attribute>
+	</Attributes>
+	<Commands>
+		<Command name="SendToDocflow" id="1">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Send to docflow</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Send to docflow</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Picture>
+				<xr:Ref>StdPicture.RestoreValues</xr:Ref>
+				<xr:LoadTransparent>true</xr:LoadTransparent>
+			</Picture>
+			<Action>SendToDocflow</Action>
+			<Representation>TextPicture</Representation>
+		</Command>
+		<Command name="GetFromDocflow" id="2">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Get from docflow</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Get from docflow</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Picture>
+				<xr:Ref>StdPicture.SaveValues</xr:Ref>
+				<xr:LoadTransparent>true</xr:LoadTransparent>
+			</Picture>
+			<Action>GetFromDocflow</Action>
+			<Representation>TextPicture</Representation>
+		</Command>
+		<Command name="SendToAccSystem" id="3">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Send to Acc. system</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Send to acc system</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Picture>
+				<xr:Ref>CommonPicture.ImportCertificateFile</xr:Ref>
+				<xr:LoadTransparent>true</xr:LoadTransparent>
+			</Picture>
+			<Action>SendToAccSystem</Action>
+			<Representation>TextPicture</Representation>
+		</Command>
+		<Command name="GetFromAccSystem" id="4">
+			<Title>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Get from Acc. system</v8:content>
+				</v8:item>
+			</Title>
+			<ToolTip>
+				<v8:item>
+					<v8:lang>en</v8:lang>
+					<v8:content>Get from Acc. system</v8:content>
+				</v8:item>
+			</ToolTip>
+			<Picture>
+				<xr:Ref>CommonPicture.ExportCertificateFile</xr:Ref>
+				<xr:LoadTransparent>true</xr:LoadTransparent>
+			</Picture>
+			<Action>GetFromAccSystem</Action>
+			<Representation>TextPicture</Representation>
+		</Command>
+	</Commands>
+</Form>
