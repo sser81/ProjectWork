@@ -94,6 +94,37 @@ Procedure GetAtServer(Customer)
 
 		AccountingSystemGetText.Clear();
 
+		arrObjectsXDTO = New Array;
+		
+		While True Do
+
+			Answer = RabbitMQ_Get(Component, AuthParameters, "AccSystem_LimitExpense");
+
+			If ValueIsFilled(Answer) Then
+
+				AccountingSystemGetText.AddLine("----------------------------------------------------------------------------------------");
+				AccountingSystemGetText.AddLine(Answer);
+
+				XMLReader = New XMLReader;
+				XMLReader.SetString(Answer);
+
+				ObjectXDTO = XDTOFactory.ReadXML(XMLReader);
+				If TypeOf(ObjectXDTO) = Type("XDTODataObject") Then
+					arrObjectsXDTO.Add(ObjectXDTO);
+				Else
+					Continue;
+				EndIf;
+			Else
+				Break;
+			EndIf;
+		EndDo;
+
+		If arrObjectsXDTO.Count() Then
+			LimitsForEmployeesServer.LoadExchangeData(arrObjectsXDTO);
+		Else
+			AccountingSystemGetText.AddLine(NStr("ru = 'Нет данных для загрузки.'; en = 'No data to get.'"));
+		EndIf;
+
 	ElsIf Customer = "Docflow" Then
 
 		DocflowGetText.Clear();
@@ -123,7 +154,11 @@ Procedure GetAtServer(Customer)
 			EndIf;
 		EndDo;
 
-		LimitsForEmployeesServer.LoadChangeObjects(arrObjectsXDTO);
+		If arrObjectsXDTO.Count() Then
+			LimitsForEmployeesServer.ДО_ЗагрузитьДанныеОбмена(arrObjectsXDTO);
+		Else
+			DocflowGetText.AddLine(NStr("ru = 'Нет данных для загрузки.'; en = 'No data to get.'"));
+		EndIf;
 	EndIf;
 
 EndProcedure
@@ -152,42 +187,69 @@ Procedure SendAtServer(Source)
 
 		Changes = LimitsForEmployeesServer.GetChangedObjects(Node);
 
-		For Each ObjectXDTO In Changes.XDTO_Objects Do
+		If Changes.XDTO_Objects.Count() Then
+			For Each ObjectXDTO In Changes.XDTO_Objects Do
 
-			XMLWriter = New XMLWriter;
-			XMLWriter.SetString();
+				XMLWriter = New XMLWriter;
+				XMLWriter.SetString();
 
-			XDTOFactory.WriteXML(XMLWriter, ObjectXDTO);
+				XDTOFactory.WriteXML(XMLWriter, ObjectXDTO,,,, XMLTypeAssignment.Explicit);
 
-			XMLRequest = XMLWriter.Close();
-			RabbitMQ_Send(Component, AuthParameters, "AccSystem", "MDM", XMLRequest);
+				XMLRequest = XMLWriter.Close();
+				RabbitMQ_Send(Component, AuthParameters, "AccSystem", "MDM", XMLRequest);
 
-			AccountingSystemSendText.AddLine("----------------------------------------------------------------------------------------");
-			AccountingSystemSendText.AddLine(XMLRequest);
-		EndDo;
-
-		If Changes.Property("Refs") And Changes.Refs.Count() Then
-			ExchangePlans.DeleteChangeRecords(Node, Changes.Refs);
-		EndIf;
-
-		If Changes.Property("RecordSets") And Changes.RecordSets.Count() Then
-			For Each strRecordSet In Changes.RecordSets Do
-
-				ObjectManager = Common.ObjectManagerByFullName(strRecordSet.Type + "." + strRecordSet.Name);
-				RecordSet = ObjectManager.CreateRecordSet();
-				
-				For Each Dimension In strRecordSet.Dimensions Do
-					RecordSet.Filter[Dimension.Key].Set(Dimension.Value);
-				EndDo;
-
-				ExchangePlans.DeleteChangeRecords(Node, RecordSet);
+				AccountingSystemSendText.AddLine("----------------------------------------------------------------------------------------");
+				AccountingSystemSendText.AddLine(XMLRequest);
 			EndDo;
+
+			If Changes.Property("Refs") And Changes.Refs.Count() Then
+				ExchangePlans.DeleteChangeRecords(Node, Changes.Refs);
+			EndIf;
+
+			If Changes.Property("RecordSets") And Changes.RecordSets.Count() Then
+				For Each strRecordSet In Changes.RecordSets Do
+
+					ObjectManager = Common.ObjectManagerByFullName(strRecordSet.Type + "." + strRecordSet.Name);
+					RecordSet = ObjectManager.CreateRecordSet();
+					
+					For Each Dimension In strRecordSet.Dimensions Do
+						RecordSet.Filter[Dimension.Key].Set(Dimension.Value);
+					EndDo;
+
+					ExchangePlans.DeleteChangeRecords(Node, RecordSet);
+				EndDo;
+			EndIf;
+		Else
+			AccountingSystemSendText.AddLine(NStr("ru = 'Нет данных для отправки.'; en = 'No data to send.'"));
 		EndIf;
 
 	ElsIf Source = "Docflow" Then
 
 		DocflowSendText.Clear();
 
+		Changes = LimitsForEmployeesServer.ДО_ПолучитьИзмененияОбъектов(Node);
+
+		If Changes.XDTO_Objects.Count() Then
+			For Each ObjectXDTO In Changes.XDTO_Objects Do
+
+				XMLWriter = New XMLWriter;
+				XMLWriter.SetString();
+
+				XDTOFactory.WriteXML(XMLWriter, ObjectXDTO,,,, XMLTypeAssignment.Explicit);
+
+				XMLRequest = XMLWriter.Close();
+				RabbitMQ_Send(Component, AuthParameters, "Docflow", "LimitExpense", XMLRequest);
+
+				DocflowSendText.AddLine("----------------------------------------------------------------------------------------");
+				DocflowSendText.AddLine(XMLRequest);
+			EndDo;
+
+			If Changes.Property("Refs") And Changes.Refs.Count() Then
+				ExchangePlans.DeleteChangeRecords(Node, Changes.Refs);
+			EndIf;
+		Else
+			DocflowSendText.AddLine(NStr("ru = 'Нет данных для отправки.'; en = 'No data to send.'"));
+		EndIf;
 	EndIf;
 
 EndProcedure

@@ -13,6 +13,10 @@
 		<AutoRecord>Allow</AutoRecord>
 	</Item>
 	<Item>
+		<Metadata>Catalog._DemoCompanies</Metadata>
+		<AutoRecord>Allow</AutoRecord>
+	</Item>
+	<Item>
 		<Metadata>Catalog.StageOfLimitsForEmployees</Metadata>
 		<AutoRecord>Allow</AutoRecord>
 	</Item>

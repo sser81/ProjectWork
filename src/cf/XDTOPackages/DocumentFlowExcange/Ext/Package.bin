@@ -32,17 +32,32 @@
 		<property name="OneTime" type="xs:boolean"/>
 		<property name="Resource" type="xs:string" nillable="true" default="amount"/>
 	</objectType>
-	<objectType name="Object">
+	<objectType xmlns:d2p1="http://www.sample-package.org" name="Object" base="d2p1:ObjectRef">
+		<property name="TypeName" type="xs:string" default="" form="Attribute"/>
+	</objectType>
+	<objectType xmlns:d2p1="http://www.sample-package.org" name="ObjectPredefined" base="d2p1:ObjectPredefinedRef">
+		<property name="TypeName" type="xs:string" default="" form="Attribute"/>
+	</objectType>
+	<objectType xmlns:d2p1="http://www.sample-package.org" name="ObjectPredefinedRef" base="d2p1:ObjectRef">
+		<property name="PredefinedDataName" type="xs:string" default="" form="Attribute"/>
+	</objectType>
+	<objectType name="ObjectRef">
 		<property xmlns:d3p1="http://v8.1c.ru/8.1/data/core" name="ID" type="d3p1:UUID"/>
-		<property name="Presentation" type="xs:string" form="Attribute"/>
-		<property name="TypeName" type="xs:string" form="Attribute"/>
-		<property name="PredefinedDataName" type="xs:string" nillable="true" form="Attribute"/>
+		<property name="Presentation" type="xs:string" default="" form="Attribute"/>
 	</objectType>
 	<objectType xmlns:d2p1="http://www.sample-package.org" name="StageOfLimitsForEmployees" base="d2p1:Object">
-		<property name="Employee" type="d2p1:Object"/>
-		<property name="CashFlowItem" type="d2p1:Object"/>
-		<property name="DescriptionKey" type="xs:string" form="Attribute"/>
-		<property name="StartDate" type="xs:dateTime" form="Element"/>
-		<property name="EndDate" type="xs:dateTime" form="Element"/>
+		<property name="Employee" type="d2p1:ObjectRef"/>
+		<property name="CashFlowItem" type="d2p1:ObjectPredefinedRef"/>
+		<property name="DescriptionKey" type="xs:string" default="" form="Attribute"/>
+		<property name="StartDate" type="xs:dateTime" default="0001-01-01T00:00:00" form="Element"/>
+		<property name="EndDate" type="xs:dateTime" default="0001-01-01T00:00:00" form="Element"/>
+	</objectType>
+	<objectType xmlns:d2p1="http://www.sample-package.org" name="ДО_Документ" base="d2p1:Object">
+		<property name="Организация" type="d2p1:ObjectRef"/>
+		<property name="Сотрудник" type="d2p1:ObjectRef"/>
+		<property name="СтатьяДвиженияДенежныхСредств" type="d2p1:ObjectPredefinedRef"/>
+		<property name="Этап" type="d2p1:ObjectRef" nillable="true"/>
+		<property name="Сумма" type="xs:decimal" nillable="true"/>
+		<property name="Дата" type="xs:dateTime"/>
 	</objectType>
 </package>

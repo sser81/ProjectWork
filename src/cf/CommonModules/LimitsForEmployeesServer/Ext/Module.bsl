@@ -51,7 +51,9 @@ EndProcedure
 #EndRegion // Public
 
 ////////////////////////////////////////////////////////////////////////////////
-// DOCUMENT FLOW EXCHANGE FUNCTIONS
+// EXCHANGE FUNCTIONS
+
+#Region AccountingSystem
 
 Function GetChangedObjects(Node) Export 
 
@@ -62,6 +64,9 @@ Function GetChangedObjects(Node) Export
 	arrRecordSets = New Array;
 
 	Type_Object						= XDTOFactory.Type("http://www.sample-package.org", "Object");
+	Type_ObjectRef					= XDTOFactory.Type("http://www.sample-package.org", "ObjectRef");
+	Type_ObjectPredefined			= XDTOFactory.Type("http://www.sample-package.org", "ObjectPredefined");
+	Type_ObjectPredefinedRef		= XDTOFactory.Type("http://www.sample-package.org", "ObjectPredefinedRef");
 	Type_StageOfLimitsForEmployees	= XDTOFactory.Type("http://www.sample-package.org", "StageOfLimitsForEmployees");
 
 	Query = New Query;
@@ -74,7 +79,6 @@ Function GetChangedObjects(Node) Export
 	|	StageOfLimitsForEmployeesChanges.Node AS Node,
 	|	StageOfLimitsForEmployees.Ref AS Ref,
 	|	REFPRESENTATION(StageOfLimitsForEmployees.Ref) AS Presentation,
-	|	"""" AS PredefinedDataName,
 	|	EmploymentContractDocument.Ref AS EmployeeRef,
 	|	REFPRESENTATION(StageOfLimitsForEmployees.EmploymentContract.Employee) AS EmployeePresentation,
 	|	TypesOfLimitsForEmployees.CashFlowItem AS CashFlowItemRef,
@@ -107,18 +111,18 @@ Function GetChangedObjects(Node) Export
 
 		XDTO_Object = XDTOFactory.Create(Type_StageOfLimitsForEmployees);
 
-		XDTO_Object.ID					= Selection.Ref.UUID();
-		XDTO_Object.Presentation		= Selection.Presentation;
-		XDTO_Object.PredefinedDataName	= Selection.PredefinedDataName;
-		XDTO_Object.TypeName			= Selection.Ref.Metadata().FullName();
+		FillPropertyValues(XDTO_Object, Selection, "Presentation, DescriptionKey, StartDate, EndDate");
 
-		XDTO_Employee = XDTOFactory.Create(Type_Object);
-		XDTO_Employee.ID			= Selection.EmployeeRef.UUID();
-		XDTO_Employee.Presentation	= Selection.EmployeePresentation;
+		XDTO_Object.ID		 = Selection.Ref.UUID();
+		XDTO_Object.TypeName = Selection.Ref.Metadata().FullName();
+
+		XDTO_Employee = XDTOFactory.Create(Type_ObjectRef);
+		XDTO_Employee.ID					= Selection.EmployeeRef.UUID();
+		XDTO_Employee.Presentation			= Selection.EmployeePresentation;
 
 		XDTO_Object.Employee = XDTO_Employee;
 
-		XDTO_CashFlowItem = XDTOFactory.Create(Type_Object);
+		XDTO_CashFlowItem = XDTOFactory.Create(Type_ObjectPredefinedRef);
 		XDTO_CashFlowItem.ID					= Selection.CashFlowItemRef.UUID();
 		XDTO_CashFlowItem.Presentation			= Selection.CashFlowItemPresentation;
 		XDTO_CashFlowItem.PredefinedDataName	= Selection.CashFlowItemPredefinedDataName;
@@ -145,11 +149,36 @@ Function GetChangedObjects(Node) Export
 	Selection = Query.Execute().Select();
 	While Selection.Next() Do
 		
-		XDTO_Object = XDTOFactory.Create(Type_Object);
+		XDTO_Object = XDTOFactory.Create(Type_ObjectPredefined);
 
 		XDTO_Object.ID					= Selection.Ref.UUID();
 		XDTO_Object.Presentation		= Selection.Presentation;
 		XDTO_Object.PredefinedDataName	= Selection.PredefinedDataName;
+		XDTO_Object.TypeName			= Selection.Ref.Metadata().FullName();
+
+		arrXDTO_Objects.Add(XDTO_Object);
+		arrRefs.Add(Selection.Ref);
+	EndDo;
+
+	//////////////////////////////////////////////////////////////////////////////////////////
+	// Catalog._DemoCompanies
+	Query.Text =
+	"SELECT
+	|	_DemoCompaniesChanges.Node AS Node,
+	|	_DemoCompaniesChanges.Ref AS Ref,
+	|	REFPRESENTATION(_DemoCompaniesChanges.Ref) AS Presentation
+	|FROM
+	|	Catalog._DemoCompanies.Changes AS _DemoCompaniesChanges
+	|WHERE
+	|	_DemoCompaniesChanges.Node = &Node";
+
+	Selection = Query.Execute().Select();
+	While Selection.Next() Do
+		
+		XDTO_Object = XDTOFactory.Create(Type_Object);
+
+		XDTO_Object.ID					= Selection.Ref.UUID();
+		XDTO_Object.Presentation		= Selection.Presentation;
 		XDTO_Object.TypeName			= Selection.Ref.Metadata().FullName();
 
 		arrXDTO_Objects.Add(XDTO_Object);
@@ -424,57 +453,108 @@ Function GetBalanceOfLimitsForEmployee(UUID_Employee, UUID_CashFlowItem, OnDate 
 
 EndFunction
 
-Procedure LoadChangeObjects(ObjectsXDTO) Export
+Procedure LoadExchangeData(ObjectsXDTO) Export
 
 	For Each ObjectXDTO In ObjectsXDTO Do
 
-		TableName = "";
 		IsChange = False;
-		
-		ObjectRef = GetRefForObjectXDTO(ObjectXDTO, TableName);
 
-		If Not ValueIsFilled(TableName) Then
- 			Continue;
-		EndIf;
+		DocumentRef = GetRefForObjectXDTO(ObjectXDTO, "Document.ExpenseByLimits");
 
-		If ValueIsFilled(ObjectRef) Then
-			NewObject = ObjectRef.GetObject();
+		If ValueIsFilled(DocumentRef) Then
+			NewDocument = DocumentRef.GetObject();
 		Else
-			ObjectManager = Common.ObjectManagerByFullName(TableName);
-
-			NewObject = ObjectManager.CreateItem();
-			NewObject.SetNewObjectRef(ObjectManager.GetRef(New UUID(ObjectXDTO.ID)));
+			NewDocument = Documents.ExpenseByLimits.CreateDocument();
+			NewDocument.SetNewObjectRef(Documents.ExpenseByLimits.GetRef(New UUID(ObjectXDTO.ID)));
 
 			IsChange = True;
 		EndIf;
 
-		If NewObject.Description <> ObjectXDTO.Presentation Then
-			NewObject.Description = ObjectXDTO.Presentation;
+		If ValueIsFilled(ObjectXDTO.Дата) Then
+			NewDocument.Date = ObjectXDTO.Дата;
+		Else
+			Continue;
+		EndIf;
+
+		EmploymentContract = GetRefForObjectXDTO(ObjectXDTO.Сотрудник, "Document.EmploymentContract");
+		If Not ValueIsFilled(EmploymentContract) Then
+			Continue;
+		EndIf;
+
+		Employee = Common.ObjectAttributeValue(EmploymentContract, "Employee");
+		If NewDocument.Employee <> Employee
+			And (ValueIsFilled(NewDocument.Employee) Or ValueIsFilled(Employee)) Then
+
+			NewDocument.Employee = Employee;
 			IsChange = True;
 		EndIf;
 
-		If TableName = "Catalog.ДО_ЭтапыЛимитовСотрудников" Then
+		Entity = GetRefForObjectXDTO(ObjectXDTO.Организация, "Catalog._DemoCompanies", True);
+		If NewDocument.Entity <> Entity
+			And (ValueIsFilled(NewDocument.Entity) Or ValueIsFilled(Entity)) Then
 
-			СтатьяДвиженияДенежныхСредств = GetRefForObjectXDTO(ObjectXDTO.CashFlowItem, "Catalog.ДО_СтатьиДвиженияДенежныхСредств", True);
-			If NewObject.СтатьяДвиженияДенежныхСредств <> СтатьяДвиженияДенежныхСредств
-				And (ValueIsFilled(NewObject.СтатьяДвиженияДенежныхСредств) Or ValueIsFilled(СтатьяДвиженияДенежныхСредств)) Then
+			NewDocument.Entity = Entity;
+			IsChange = True;
+		EndIf;
 
-				NewObject.СтатьяДвиженияДенежныхСредств = СтатьяДвиженияДенежныхСредств;
-				IsChange = True;
+		TableLimitsForEmployees = NewDocument.LimitsForEmployees.Unload();
+		TableLimitsForEmployees.Columns.Add("Different", New TypeDescription("Number"));
+		TableLimitsForEmployees.FillValues(-1, "Different");
+
+		NewRow = TableLimitsForEmployees.Add();
+		NewRow.Different = 1;
+
+		CashFlowItem = GetRefForObjectXDTO(ObjectXDTO.СтатьяДвиженияДенежныхСредств, "Catalog.CashFlowItems", True);
+		If ValueIsFilled(CashFlowItem) Then
+
+			Query = New Query;
+			Query.Text =
+			"SELECT TOP 1
+			|	TypesOfLimitsForEmployees.Ref AS Ref
+			|FROM
+			|	Catalog.TypesOfLimitsForEmployees AS TypesOfLimitsForEmployees
+			|WHERE
+			|	TypesOfLimitsForEmployees.CashFlowItem = &CashFlowItem
+			|	AND NOT TypesOfLimitsForEmployees.DeletionMark";
+
+			Query.SetParameter("CashFlowItem", CashFlowItem);
+
+			Selection = Query.Execute().Select();
+			If Selection.Next() Then
+				NewRow.TypeOfLimit = Selection.Ref;
 			EndIf;
+		EndIf;
 
-			Владелец = GetRefForObjectXDTO(ObjectXDTO.Employee, "Catalog.ДО_Сотрудники", True);
-			If NewObject.Владелец <> Владелец
-				And (ValueIsFilled(NewObject.Владелец) Or ValueIsFilled(Владелец)) Then
+		NewRow.Stage = GetRefForObjectXDTO(ObjectXDTO.Этап, "Catalog.StageOfLimitsForEmployees", True);
+		NewRow.Limit = ObjectXDTO.Сумма;
 
-				NewObject.Владелец = Владелец;
-				IsChange = True;
+		TableLimitsForEmployees.GroupBy("TypeOfLimit, Stage, Limit", "Different");
+
+		IsChangeInTable = False;
+		Index = 0;
+		While Index < TableLimitsForEmployees.Count() Do
+
+			RowTable = TableLimitsForEmployees[Index];
+
+			If RowTable.Different < 0 Then
+				TableLimitsForEmployees.Delete(RowTable);
+				IsChangeInTable = True;
+
+			ElsIf RowTable.Different > 0 Then
+				Index = Index + 1;
+				IsChangeInTable = True;
+			Else
+				Index = Index + 1;
 			EndIf;
+		EndDo;
+
+		If IsChangeInTable Then
+			NewDocument.LimitsForEmployees.Load(TableLimitsForEmployees);
+			IsChange = True;
 		EndIf;
 
 		If IsChange Then
-			NewObject.DataExchange.Load = True;
-			NewObject.Write();
+			NewDocument.Write(DocumentWriteMode.Posting, DocumentPostingMode.Regular);
 		EndIf;
 	EndDo;
 
@@ -503,15 +583,20 @@ Function GetRefForObjectXDTO(ObjectXDTO, TypeName = "", GetRefForUUID = False)
 
 			TypeNameExt = ObjectXDTO.TypeName;
 
-			If StrFind(Upper(TypeNameExt), Upper("StageOfLimitsForEmployees")) > 0 Then
-				TypeName = "Catalog.ДО_ЭтапыЛимитовСотрудников";
+			If StrFind(Upper(TypeNameExt), Upper("ДО_ЭтапыЛимитовСотрудников")) > 0 Then
+				TypeName = "Catalog.StageOfLimitsForEmployees";
 
-			ElsIf StrFind(Upper(TypeNameExt), Upper("CashFlowItems")) > 0 Then
-				TypeName = "Catalog.ДО_СтатьиДвиженияДенежныхСредств";
+			ElsIf StrFind(Upper(TypeNameExt), Upper("ДО_СтатьиДвиженияДенежныхСредств")) > 0 Then
+				TypeName = "Catalog.CashFlowItems";
 
-			ElsIf StrFind(Upper(TypeNameExt), Upper("_DemoIndividuals")) > 0
-				Or StrFind(Upper(TypeNameExt), Upper("EmploymentContract")) > 0 Then
-				TypeName = "Catalog.ДО_Сотрудники";
+			ElsIf StrFind(Upper(TypeNameExt), Upper("ДО_Организации")) > 0 Then
+				TypeName = "Catalog._DemoCompanies";
+
+			ElsIf StrFind(Upper(TypeNameExt), Upper("ДО_Сотрудники")) > 0 Then
+				TypeName = "Document.EmploymentContract";
+
+			ElsIf StrFind(Upper(TypeNameExt), Upper("ДО_Документы")) > 0 Then
+				TypeName = "Document.ExpenseByLimits";
 			EndIf;
 		EndIf;
 	EndIf;
@@ -530,23 +615,31 @@ Function GetRefForObjectXDTO(ObjectXDTO, TypeName = "", GetRefForUUID = False)
 	Query.Text =
 	"SELECT
 	|	Table.Ref AS Ref,
-	|	1 AS Priority
+	|	2 AS Priority
 	|FROM
 	|	&Table AS Table
 	|WHERE
-	|	Table.Predefined
-	|	AND Table.PredefinedDataName = &PredefinedDataName
+	|	UUID(Table.Ref) = &UUID_Ref";
+
+	If Upper(Left(TypeName, 8)) <> "DOCUMENT" Then
+		Query.Text = Query.Text + "
+		|
+		|UNION
+		|
+		|SELECT
+		|	Table.Ref,
+		|	1
+		|FROM
+		|	&Table AS Table
+		|WHERE
+		|	Table.Predefined
+		|	AND Table.PredefinedDataName = &PredefinedDataName";
+	EndIf;
+
+	Query.Text = Query.Text + "
 	|
-	|UNION
-	|
-	|SELECT
-	|	Table.Ref,
-	|	2
-	|FROM
-	|	&Table AS Table
-	|WHERE
-	|	NOT Table.Predefined
-	|	AND UUID(Table.Ref) = &UUID_Ref";
+	|ORDER BY
+	|	Priority";
 
 	Query.Text = StrReplace(Query.Text, "&Table", TypeName);
 
@@ -567,6 +660,266 @@ Function GetRefForObjectXDTO(ObjectXDTO, TypeName = "", GetRefForUUID = False)
 	EndIf;				
 
 EndFunction
+
+#EndRegion // AccountingSystem
+
+#Region DocumentFlow
+
+Функция ДО_ПолучитьИзмененияОбъектов(Узел) Экспорт
+
+	УстановитьПривилегированныйРежим(Истина);
+
+	мОбъектыXDTO = Новый Массив;
+	мСсылки = Новый Массив;
+
+	Тип_ObjectRef			= ФабрикаXDTO.Тип("http://www.sample-package.org", "ObjectRef");
+	Тип_ObjectPredefinedRef	= ФабрикаXDTO.Тип("http://www.sample-package.org", "ObjectPredefinedRef");
+	Тип_ДО_Документ 		= ФабрикаXDTO.Тип("http://www.sample-package.org", "ДО_Документ");
+
+	Запрос = Новый Запрос;
+	Запрос.УстановитьПараметр("Узел", Узел);
+
+	Запрос.Текст =
+	"ВЫБРАТЬ
+	|	ДО_ДокументыИзменения.Узел КАК Узел,
+	|	ДО_Документы.Ссылка КАК Ссылка,
+	|	ПРЕДСТАВЛЕНИЕССЫЛКИ(ДО_Документы.Ссылка) КАК Представление,
+	|	ДО_Документы.Организация КАК Организация,
+	|	ДО_Документы.Сотрудник КАК Сотрудник,
+	|	ДО_Документы.СтатьяДвиженияДенежныхСредств КАК СтатьяДвиженияДенежныхСредств,
+	|	ДО_Документы.СтатьяДвиженияДенежныхСредств.PredefinedDataName AS СтатьяДвиженияДенежныхСредствИмяПредопределенного,
+	|	ДО_Документы.Этап КАК Этап,
+	|	ДО_Документы.Сумма КАК Сумма,
+	|	ДО_Документы.Дата КАК Дата
+	|ИЗ
+	|	Справочник.ДО_Документы.Изменения КАК ДО_ДокументыИзменения
+	|		ЛЕВОЕ СОЕДИНЕНИЕ Справочник.ДО_Документы КАК ДО_Документы
+	|		ПО ДО_ДокументыИзменения.Ссылка = ДО_Документы.Ссылка
+	|ГДЕ
+	|	ДО_ДокументыИзменения.Узел = &Узел
+	|	И ДО_Документы.Согласован";
+
+	Выборка = Запрос.Выполнить().Выбрать();
+	Пока Выборка.Следующий() Цикл
+
+		ОбъектXDTO = ФабрикаXDTO.Создать(Тип_ДО_Документ);
+
+		ОбъектXDTO.ID			= Выборка.Ссылка.УникальныйИдентификатор();
+		ОбъектXDTO.Presentation	= Выборка.Представление;
+		ОбъектXDTO.TypeName		= Выборка.Ссылка.Метаданные().ПолноеИмя();
+
+		//Организация
+		XDTO_Организация = ФабрикаXDTO.Создать(Тип_ObjectRef);
+		XDTO_Организация.ID				= Выборка.Организация.УникальныйИдентификатор();
+		XDTO_Организация.Presentation	= Строка(Выборка.Организация);
+
+		ОбъектXDTO.Организация = XDTO_Организация;
+
+		//Сотрудник
+		XDTO_Сотрудник = ФабрикаXDTO.Создать(Тип_ObjectRef);
+		XDTO_Сотрудник.ID			= Выборка.Сотрудник.УникальныйИдентификатор();
+		XDTO_Сотрудник.Presentation	= Строка(Выборка.Сотрудник);
+
+		ОбъектXDTO.Сотрудник = XDTO_Сотрудник;
+
+		//СтатьяДвиженияДенежныхСредств
+		XDTO_СтатьяДвиженияДенежныхСредств = ФабрикаXDTO.Создать(Тип_ObjectPredefinedRef);
+		XDTO_СтатьяДвиженияДенежныхСредств.ID					= Выборка.СтатьяДвиженияДенежныхСредств.УникальныйИдентификатор();
+		XDTO_СтатьяДвиженияДенежныхСредств.Presentation			= Строка(Выборка.СтатьяДвиженияДенежныхСредств);
+		XDTO_СтатьяДвиженияДенежныхСредств.PredefinedDataName	= Строка(Выборка.СтатьяДвиженияДенежныхСредствИмяПредопределенного);
+
+		ОбъектXDTO.СтатьяДвиженияДенежныхСредств = XDTO_СтатьяДвиженияДенежныхСредств;
+
+		//Этап
+		XDTO_Этап = ФабрикаXDTO.Создать(Тип_ObjectRef);
+		XDTO_Этап.ID			= Выборка.Этап.УникальныйИдентификатор();
+		XDTO_Этап.Presentation	= Строка(Выборка.Этап);
+
+		ОбъектXDTO.Этап = XDTO_Этап;
+
+		ОбъектXDTO.Сумма = Выборка.Сумма;
+		ОбъектXDTO.Дата  = Выборка.Дата;
+
+		мОбъектыXDTO.Добавить(ОбъектXDTO);
+		мСсылки.Добавить(Выборка.Ссылка);
+	КонецЦикла;
+
+	Возврат Новый Структура("Refs, XDTO_Objects", мСсылки, мОбъектыXDTO);
+
+КонецФункции
+
+Процедура ДО_ЗагрузитьДанныеОбмена(ОбъектыXDTO) Экспорт
+
+	For Each ОбъектXDTO In ОбъектыXDTO Do
+
+		TableName = "";
+		IsChange = False;
+
+		ObjectRef = ДО_ПолучитьСсылкуПоОбъектуXDTO(ОбъектXDTO, TableName);
+
+		If Not ValueIsFilled(TableName) Then
+ 			Continue;
+		EndIf;
+
+		If ValueIsFilled(ObjectRef) Then
+			NewObject = ObjectRef.GetObject();
+		Else
+			ObjectManager = Common.ObjectManagerByFullName(TableName);
+
+			NewObject = ObjectManager.CreateItem();
+			NewObject.SetNewObjectRef(ObjectManager.GetRef(New UUID(ОбъектXDTO.ID)));
+
+			IsChange = True;
+		EndIf;
+
+		If NewObject.Description <> ОбъектXDTO.Presentation Then
+			NewObject.Description = ОбъектXDTO.Presentation;
+			IsChange = True;
+		EndIf;
+
+		If TableName = "Справочник.ДО_ЭтапыЛимитовСотрудников" Then
+
+			СтатьяДвиженияДенежныхСредств = ДО_ПолучитьСсылкуПоОбъектуXDTO(ОбъектXDTO.CashFlowItem, "Справочник.ДО_СтатьиДвиженияДенежныхСредств", True);
+			If NewObject.СтатьяДвиженияДенежныхСредств <> СтатьяДвиженияДенежныхСредств
+				And (ValueIsFilled(NewObject.СтатьяДвиженияДенежныхСредств) Or ValueIsFilled(СтатьяДвиженияДенежныхСредств)) Then
+
+				NewObject.СтатьяДвиженияДенежныхСредств = СтатьяДвиженияДенежныхСредств;
+				IsChange = True;
+			EndIf;
+
+			Владелец = ДО_ПолучитьСсылкуПоОбъектуXDTO(ОбъектXDTO.Employee, "Справочник.ДО_Сотрудники", True);
+			If NewObject.Владелец <> Владелец
+				And (ValueIsFilled(NewObject.Владелец) Or ValueIsFilled(Владелец)) Then
+
+				NewObject.Владелец = Владелец;
+				IsChange = True;
+			EndIf;
+
+			If NewObject.ТекстовыйКлюч <> ОбъектXDTO.DescriptionKey
+				And (ValueIsFilled(NewObject.ТекстовыйКлюч) Or ValueIsFilled(ОбъектXDTO.DescriptionKey)) Then
+
+				NewObject.ТекстовыйКлюч = ОбъектXDTO.DescriptionKey;
+				IsChange = True;
+			EndIf;
+
+			If NewObject.ДатаНачала <> ОбъектXDTO.StartDate
+				And (ValueIsFilled(NewObject.ДатаНачала) Or ValueIsFilled(ОбъектXDTO.StartDate)) Then
+
+				NewObject.ДатаНачала = ОбъектXDTO.StartDate;
+				IsChange = True;
+			EndIf;
+
+			If NewObject.ДатаОкончания <> ОбъектXDTO.EndDate
+				And (ValueIsFilled(NewObject.ДатаОкончания) Or ValueIsFilled(ОбъектXDTO.EndDate)) Then
+
+				NewObject.ДатаОкончания = ОбъектXDTO.EndDate;
+				IsChange = True;
+			EndIf;
+		EndIf;
+
+		If IsChange Then
+			NewObject.DataExchange.Load = True;
+			NewObject.Write();
+		EndIf;
+	EndDo;
+
+КонецПроцедуры
+
+Функция ДО_ПолучитьСсылкуПоОбъектуXDTO(ОбъектXDTO, ИмяТипа = "", ПолучатьСсылкуПоИдентификатору = Ложь)
+
+	ЕстьПолеТипа 					= Ложь;
+	ЕстьПолеИмениПредопределенного	= Ложь;
+
+	СвойстваXDTO = ОбъектXDTO.Свойства();
+	Для Каждого СвойствоXDTO Из СвойстваXDTO Цикл
+
+		Если ВРег(СвойствоXDTO.Name) = ВРег("TypeName") Тогда
+			ЕстьПолеТипа = Истина;
+		КонецЕсли;
+
+		Если ВРег(СвойствоXDTO.Name) = ВРег("PredefinedDataName") Тогда
+			ЕстьПолеИмениПредопределенного = Истина;
+		КонецЕсли;
+	КонецЦикла;
+	
+	Если НЕ ЗначениеЗаполнено(ИмяТипа) Тогда
+
+		Если ЕстьПолеТипа Тогда
+
+			ИмяТипаПолученныхДанных = ОбъектXDTO.TypeName;
+
+			Если СтрНайти(ВРег(ИмяТипаПолученныхДанных), ВРег("StageOfLimitsForEmployees")) > 0 Тогда
+				ИмяТипа = "Справочник.ДО_ЭтапыЛимитовСотрудников";
+
+			ИначеЕсли СтрНайти(ВРег(ИмяТипаПолученныхДанных), ВРег("CashFlowItems")) > 0 Тогда
+				ИмяТипа = "Справочник.ДО_СтатьиДвиженияДенежныхСредств";
+
+			ИначеЕсли СтрНайти(ВРег(ИмяТипаПолученныхДанных), ВРег("_DemoCompanies")) > 0 Тогда
+				ИмяТипа = "Справочник.ДО_Организации";
+
+			ИначеЕсли СтрНайти(ВРег(ИмяТипаПолученныхДанных), ВРег("_DemoIndividuals")) > 0
+				ИЛИ СтрНайти(ВРег(ИмяТипаПолученныхДанных), ВРег("EmploymentContract")) > 0 Тогда
+				ИмяТипа = "Справочник.ДО_Сотрудники";
+			КонецЕсли;
+		КонецЕсли;
+	КонецЕсли;
+
+	Если НЕ ЗначениеЗаполнено(ИмяТипа) Тогда
+		Возврат Неопределено;
+	КонецЕсли;
+
+	Если ЕстьПолеИмениПредопределенного Тогда
+		ИмяПредопределенного = ОбъектXDTO.PredefinedDataName;
+	Иначе
+		ИмяПредопределенного = "";
+	КонецЕсли;
+
+	Запрос = Новый Запрос;
+	Запрос.Текст =
+	"SELECT
+	|	Table.Ref AS Ref,
+	|	1 AS Priority
+	|FROM
+	|	&Table AS Table
+	|WHERE
+	|	Table.Predefined
+	|	AND Table.PredefinedDataName = &PredefinedDataName
+	|
+	|UNION
+	|
+	|SELECT
+	|	Table.Ref,
+	|	2
+	|FROM
+	|	&Table AS Table
+	|WHERE
+	|	NOT Table.Predefined
+	|	AND UUID(Table.Ref) = &UUID_Ref
+	|
+	|ORDER BY
+	|	Priority";
+
+	Запрос.Текст = СтрЗаменить(Запрос.Текст, "&Table", ИмяТипа);
+
+	Запрос.УстановитьПараметр("UUID_Ref", Новый УникальныйИдентификатор(ОбъектXDTO.ID));
+	Запрос.УстановитьПараметр("PredefinedDataName", ИмяПредопределенного);
+
+	Выборка = Запрос.Выполнить().Выбрать();
+	Если Выборка.Следующий() Тогда
+
+		Возврат Выборка.Ref;
+
+	ИначеЕсли ПолучатьСсылкуПоИдентификатору Тогда
+
+		МенеджерОбъекта = Common.ObjectManagerByFullName(ИмяТипа);
+		Возврат МенеджерОбъекта.ПолучитьСсылку(Новый УникальныйИдентификатор(ОбъектXDTO.ID));
+	Иначе
+		Возврат Неопределено
+	КонецЕсли;				
+
+КонецФункции
+
+#EndRegion // DocumentFlow
 
 ////////////////////////////////////////////////////////////////////////////////
 
